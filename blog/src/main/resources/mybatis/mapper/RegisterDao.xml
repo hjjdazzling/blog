@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjj.blog.register.dao.RegisterDao">
+    <insert id="registerUser" useGeneratedKeys="true" keyProperty="id">
+        insert into user(username, password) values(#{username}, #{password});
+    </insert>
+
+    <insert id="registerUserInformation">
+        insert into user_information(user_id, professional_type3_id, real_name, birth, phone, email, attention_number, fans_number, description)
+        values(#{user_id}, #{professionalType3Id}, #{realName}, #{birth}, #{phone}, #{email}, 0, 0, #{description});
+    </insert>
+</mapper>
