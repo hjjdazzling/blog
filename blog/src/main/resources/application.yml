@@ -10,6 +10,7 @@ spring:
     port: 8890
   thymeleaf:
     cache: false
+    mode: LEGACYHTML5
   messages:
     basename: i18n.register
   #引入国际化资源文件
