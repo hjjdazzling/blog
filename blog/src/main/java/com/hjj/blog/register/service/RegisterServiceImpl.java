@@ -6,24 +6,29 @@ import com.hjj.blog.register.dao.RegisterDao;
 import com.hjj.blog.register.exception.UserExistedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.SQLException;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by haojunjie on 2019/2/25
  */
+@Transactional
 @Service("registerServiceImpl")
-public class RegisterServiceImpl implements RegisterService {
+public class RegisterServiceImpl implements RegisterService  {
     @Autowired
     public RegisterDao registerDao;
 
-    public Integer register(User user, UserInformation userInformation) throws UserExistedException {
+    @Override
+    public Integer registerUser(User user) throws UserExistedException {
         try {
-            registerDao.registerUser(user);
+            return registerDao.registerUser(user);
         } catch (Exception e) {
             throw new UserExistedException();
         }
-        registerDao.registerUserInformation(userInformation);
-        return 0;
+
+    }
+
+    @Override
+    public Integer registerUserInformation(UserInformation  userInformation) {
+        return registerDao.registerUserInformation(userInformation);
     }
 }

@@ -23,7 +23,9 @@ public class RegisterDaoTest {
 
     @Test
     public void registerUserTest() {
-        System.out.println(registerDao.registerUser(new User("haojunjie", "haojunjie")));
+        User user = new User("12345", "1234");
+        registerDao.registerUser(user);
+        System.out.println(user.getId());
     }
 
     @Test

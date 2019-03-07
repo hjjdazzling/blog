@@ -29,7 +29,6 @@ public class LoginServiceImpl implements LoginService {
 
         //先查缓存 null
         if (result == null) {
-            System.out.println("查询数据库");
             result = loginDao.login(user);
 
             if (result != null && result > 0) {

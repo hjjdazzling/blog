@@ -1,11 +1,17 @@
 package com.hjj.blog.projo;
 
+
+import org.hibernate.validator.constraints.NotBlank;
+
+
 /**
  * Created by haojunjie on 2019/2/23
  */
 public class User {
     private Integer id;
+    @NotBlank(message = "用户名不能为空")
     private String username;
+    @NotBlank(message = "密码不能为空")
     private String password;
 
     public User() {

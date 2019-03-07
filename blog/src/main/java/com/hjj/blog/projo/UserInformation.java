@@ -1,5 +1,11 @@
 package com.hjj.blog.projo;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 /**
@@ -9,9 +15,14 @@ public class UserInformation {
     private Integer id;
     private Integer user_id;
     private Integer professionalType3Id;
+    @NotBlank(message = "请输入你的真实姓名")
     private String realName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past(message = "必须是过去的时间")
     private Date birth;
+    @NotBlank(message = "请输入你的手机号")
     private String phone;
+    @Email(message="请输入正确的email格式")
     private String email;
     private Integer attentionNumber;
     private Integer fansNumber;

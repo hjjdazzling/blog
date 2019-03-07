@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class RegisterExceptionHandler {
     @ExceptionHandler(UserExistedException.class)
     public ModelAndView handlerUserExistedException() {
-        ModelAndView modelAndView = new ModelAndView("login");
-        modelAndView.addObject("error", "对不起,此用户名已被注册");
+        ModelAndView modelAndView = new ModelAndView("register");
+        modelAndView.addObject("existedUser", "对不起,此用户名已被注册");
         return modelAndView;
     }
 }

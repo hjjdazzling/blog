@@ -1,13 +1,18 @@
-debug: true
+#debug: true
 spring:
   datasource:
     username: root
     password: haojunjie
-    url: jdbc:mysql://192.168.10.128:9999/blog
+    url: jdbc:mysql://10.128.0.1:9999/blog
     driver-class-name: com.mysql.jdbc.Driver
   redis:
-    host: 192.168.10.128
+    host: 10.128.0.1
     port: 8890
+  thymeleaf:
+    cache: false
+  messages:
+    basename: i18n.register
+  #引入国际化资源文件
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml

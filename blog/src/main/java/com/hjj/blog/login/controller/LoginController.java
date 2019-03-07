@@ -5,8 +5,10 @@ import com.hjj.blog.projo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +18,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by haojunjie on 2019/2/23
  */
 @Controller("loginController")
-@RequestMapping("LoginController")
+@RequestMapping("/LoginController")
 public class LoginController {
     @Autowired
     public LoginService loginService;
+
+
+
+
 
 
     /**
@@ -28,14 +34,13 @@ public class LoginController {
      * @param session
      * @return
      */
-    @ResponseBody
-    @GetMapping("/login")
-    public Integer login(User user, HttpSession session) {
-        System.out.println(user);
-        Map<String,String> map = new HashMap<>();
+    @PostMapping("/login")
+    public String login(User user, HttpSession session, HttpServletRequest request) {
 
         if (loginService.login(user) == null || loginService.login(user) < 0) {
-            return 0;
+
+            request.setAttribute("error", "用户名或者密码不正确");
+            return "index";
         } else {
             ServletContext servletContext = session.getServletContext();
 
@@ -55,9 +60,10 @@ public class LoginController {
 
                 loginUsers.put(user.getUsername(), session);
             }
-            map.put("result", "success");
 
-            return map;
+
+
+            return "main";
         }
     }
 }
