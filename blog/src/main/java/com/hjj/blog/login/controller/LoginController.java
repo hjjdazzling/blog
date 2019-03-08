@@ -4,13 +4,17 @@ import com.hjj.blog.login.service.LoginService;
 import com.hjj.blog.projo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -23,11 +27,6 @@ public class LoginController {
     @Autowired
     public LoginService loginService;
 
-
-
-
-
-
     /**
      * 单点登陆
      * @param user
@@ -35,12 +34,28 @@ public class LoginController {
      * @return
      */
     @PostMapping("/login")
-    public String login(User user, HttpSession session, HttpServletRequest request) {
+    public String login(@Valid User user, BindingResult bindingResult, HttpSession session, HttpServletRequest request) {
 
-        if (loginService.login(user) == null || loginService.login(user) < 0) {
+        if (bindingResult.getErrorCount() > 0) {
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+
+
+            for (FieldError fieldError : fieldErrors) {
+                //属性
+                String field = fieldError.getField();
+                //错误信息
+                String message = fieldError.getDefaultMessage();
+
+                request.setAttribute(field, message);
+                return "/index";
+            }
+        }
+
+        Integer id = loginService.login(user);
+        if (id == null || id < 0) {
 
             request.setAttribute("error", "用户名或者密码不正确");
-            return "index";
+            return "/index";
         } else {
             ServletContext servletContext = session.getServletContext();
 
@@ -53,6 +68,7 @@ public class LoginController {
                     (ConcurrentHashMap<String, HttpSession>)servletContext.getAttribute("loginUsers");
 
             if (loginUsers.get(user.getUsername()) == null) {
+                session.setAttribute("user", user);
                 loginUsers.put(user.getUsername(), session);
             } else {
                 HttpSession sessionOld = loginUsers.get(user.getUsername());
@@ -63,7 +79,7 @@ public class LoginController {
 
 
 
-            return "main";
+            return "write";
         }
     }
 }

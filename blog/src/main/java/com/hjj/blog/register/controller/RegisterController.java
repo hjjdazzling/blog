@@ -27,6 +27,10 @@ public class RegisterController {
     @Autowired
     public RegisterService registerService;
 
+    @RequestMapping("/register.html")
+    public String getRegister() {
+        return "register";
+    }
     @PostMapping("/register")
     public String register(@Valid User user, BindingResult bindingResult,
                                  @Valid UserInformation userInformation, BindingResult bindingResult2,
@@ -73,6 +77,6 @@ public class RegisterController {
         registerService.registerUserInformation(userInformation);
 
 
-        return "main";
+        return "index";
     }
 }

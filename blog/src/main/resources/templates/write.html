@@ -39,25 +39,18 @@
 </head>
 <body>
 <form method="post" action="/save" >
+    <input type="text" name="userId" th:value="${session.user.id}"/>
     <div class="container">
         <br/>
         <br/>
         <div class="row">
             <div class="col-lg-6">
                 <div class="input-group">
-                    <div class="input-group-btn">
-
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false" id="categoryBtn">分类</button>
-
-                        <ul class="dropdown-menu">
-                            <li >
-                                <a   onclick="selectCategory(this)" ></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <input name="category" id="cateoryInput" type="hidden" />
-                    <input type="text" class="form-contorl" palceholder="标题" name="title" th:text="${title}"/>
+                    类型:<select name="articleTypeId">
+                    <option value="1">哲学</option>
+                    <option value="2">逻辑学</option>
+                    </select>
+                    标题:<input type="text"  name="title" th:value="${title}"/>
                 </div>
             </div>
         </div>

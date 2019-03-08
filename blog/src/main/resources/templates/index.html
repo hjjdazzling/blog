@@ -1,16 +1,150 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>登录</title>
+    <!-- <link rel="stylesheet" href="./css/index.css"> -->
+    <link rel="stylesheet" href="/icons/iconfont.css">
+    <style type="text/css">
+    * {
+  margin: 0;
+  padding: 0;
+}
+.login {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #2f4050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('/images/08.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.login .lg-box {
+  min-width: 290px;
+  min-height: 300px;
+  max-width: 460px;
+  max-height: 380px;
+  width: 25%;
+  height: 48%;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  border-radius: 2%;
+  position: relative;
+  box-shadow: 0 5px 5px 5px #ccc inset;
+  opacity: 1.1;
+}
+.warning {
+  width: 100%;
+  height: 30px;
+  color: red;
+  position: absolute;
+  /*bottom: 8vh;*/
+  font-size: 2vh;
+  text-align: center;
+  margin-top: 1vh;
+}
+.login .lg-box .lg-title {
+  width: 100%;
+  height: 20%;
+  background-color: #042F7E;
+  font-size: 3vh;
+  padding-left: 14%;
+  padding-top: 5%;
+  box-sizing: border-box;
+  color: #FFFFFF;
+}
+.login .lg-box .form-action {
+  width: 100%;
+  height: 60%;
+  overflow: hidden;
+  padding-top: 30px;
+}
+.login .lg-box .form-action form {
+  width: 100%;
+  height: 100%;
+}
+.login .lg-box .form-action form input {
+  display: block;
+  margin: 0 auto;
+  width: 73%;
+  height: 42px;
+  border-radius: 10px;
+  border: 0;
+  outline: none;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  padding-left: 37px;
+  position: relative;
+}
+.login .lg-box .form-action form .iconuser {
+  position: absolute;
+  left: 9vh;
+  top: 16vh;
+  z-index: 999;
+}
+.login .lg-box .form-action form .iconpass {
+  position: absolute;
+  left: 0;
+  left: 9vh;
+  top: 25vh;
+  z-index: 999;
+}
+.login .lg-box .form-action form .lg-btn {
+  width: 73%;
+  height: 41px;
+  border-radius: 10px;
+  border: 0;
+  outline: none;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 2vh;
+  margin-top: 26px;
+  background-color: #0D50BB;
+}
+.login .lg-box .form-action form input:focus {
+  border: 1px solid blue!important;
+}
+form a
+{
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  font-size: 2vh;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 1vh;
+}
+    </style>
 </head>
+
 <body>
-    <form action = "/LoginController/login" method="post">
-        用户名:<input type="text" name="username"/><br/>
-        密码:<input type="password" name="password"/><br/>
-        <input type="submit" name="登录"/><br/>
-        <div th:text="${error}"></div>
-    </form>
-    <a href="register.html">注册</a>
+    <div class="login">
+        <div class="lg-box">
+            <div class="lg-title">
+                博客
+            </div>
+            <div class="form-action">
+                <form action="/LoginController/login" method="post">
+                    <i class="iconfont-vue iconuser">&#xe61c;</i>
+                    <input id="username" placeholder="请输入用户名" type="text" name="username" />
+                    <i class="iconfont-vue iconpass">&#xe62a;</i>
+                    <input id="password" placeholder="请输入密码" type="password" name="password" />
+                    <button type="submit" onclick="funbtn()" class="lg-btn">登录</button>
+                    <a href="/RegisterController/register.html">注册</a>
+                </form>
+            </div>
+            <div class="warning" th:text="${error}"></div>
+            <div class="warning" th:text="${username}"></div>
+            <div class="warning" th:text="${password}"></div>
+            
+    </div>
 </body>
 </html>

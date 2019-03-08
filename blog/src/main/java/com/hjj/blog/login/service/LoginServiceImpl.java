@@ -25,7 +25,8 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Integer login(User user) {
         Integer result = null;
-        result = loginCache.login(user);
+        //先取消查缓存，因为缓存设置存在问题
+        //result = loginCache.login(user);
 
         //先查缓存 null
         if (result == null) {
@@ -41,7 +42,7 @@ public class LoginServiceImpl implements LoginService {
             result = 1;
         }
 
-
+        user.setId(result);
         return result;
     }
 }

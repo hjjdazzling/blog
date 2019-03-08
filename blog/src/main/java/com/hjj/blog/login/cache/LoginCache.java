@@ -3,6 +3,7 @@ package com.hjj.blog.login.cache;
 import com.hjj.blog.projo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -27,22 +28,24 @@ public class LoginCache {
     public Integer login(User user) {
 
         if (redisTemplate.opsForHash().entries("user").size() == 0) {
-            Map<String, String> map = new HashMap<>();
-
-            map.put("1", "1");
+            Map<String, User> map = new HashMap<>();
+            User user1 = new User();
+            user1.setId(1);
+            map.put("1", user1);
             //设置过期时间
             redisTemplate.opsForHash().putAll("user", map);
             redisTemplate.expire("user", 24, TimeUnit.HOURS);
             return null;
         } else {
             Map<Object, Object> map = redisTemplate.opsForHash().entries("user");
-            String password = (String)map.get(user.getUsername());
+            redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(User.class));
+            User userCache = (User)map.get(user.getUsername());
 
-            if (password == null) {
+            if (userCache == null) {
                return null;
             }
 
-            if (user.getPassword().equals(password)) {
+            if (user.getPassword().equals(userCache.getPassword())) {
                 return 1;
             } else {
                 return 0;
@@ -55,8 +58,8 @@ public class LoginCache {
         Map<Object, Object> map = redisTemplate.opsForHash().entries("user");
         map.put(user.getUsername(), user.getPassword());
 
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(User.class));
         //将结果缓存起来
-        redisTemplate.opsForHash().put("user", user.getUsername(), user.getPassword());
-
+        redisTemplate.opsForHash().put("user", user.getUsername(), user);
     }
 }

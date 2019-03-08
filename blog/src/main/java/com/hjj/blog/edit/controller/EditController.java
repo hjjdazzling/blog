@@ -1,4 +1,4 @@
-package com.hjj.blog.edit;
+package com.hjj.blog.edit.controller;
 
 import org.pegdown.PegDownProcessor;
 import org.springframework.stereotype.Controller;
@@ -16,16 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 public class EditController {
     @RequestMapping("/write")
     public String write() {
+        //获取文章类型的值放入request域中
         return "write";
     }
 
     @RequestMapping("/save")
     public String save(@RequestParam("title") String title,@RequestParam("content") String content,
                         HttpServletRequest request) {
-        request.setAttribute("title", title);
-        PegDownProcessor  peg=new PegDownProcessor();
-        String html =peg.markdownToHtml(content);
-        request.setAttribute("content", html);
+
+
         return "display";
     }
 
