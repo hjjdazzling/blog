@@ -1,7 +1,6 @@
 package com.hjj.blog.register.controller;
 
-import com.hjj.blog.projo.User;
-import com.hjj.blog.projo.UserInformation;
+import com.hjj.blog.projo.*;
 import com.hjj.blog.register.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +24,31 @@ public class RegisterController {
     public RegisterService registerService;
 
     @RequestMapping("/register.html")
-    public String getRegister() {
+    public String getRegister(@RequestParam("professionType3Id") Integer id, HttpServletRequest request) {
+        System.out.println(id);
+        request.setAttribute("id", id);
         return "register";
     }
+
+    @RequestMapping("selectProfessionType1")
+    public String selectProfessionType1(HttpServletRequest request) {
+        List<ProfessionalType1> list = registerService.selectProfessionType1();
+        request.setAttribute("professionType1", list);
+        return "selectType1";
+    }
+    @RequestMapping("selectProfessionType2")
+    public String selectProfessionType2(@RequestParam("professionType1Id") Integer id, HttpServletRequest request) {
+        List<ProfessionalType2> list = registerService.selectProfessionType2(id);
+        request.setAttribute("professionType2", list);
+        return "selectType2";
+    }
+    @RequestMapping("selectProfessionType3")
+    public String selectProfessionType3(@RequestParam("professionType2Id") Integer id, HttpServletRequest request) {
+        List<ProfessionalType3> list = registerService.selectProfessionType3(id);
+        request.setAttribute("professionType3", list);
+        return "selectType3";
+    }
+
     @PostMapping("/register")
     public String register(@Valid User user, BindingResult bindingResult,
                                  @Valid UserInformation userInformation, BindingResult bindingResult2,
@@ -76,4 +97,5 @@ public class RegisterController {
 
         return "index";
     }
+
 }

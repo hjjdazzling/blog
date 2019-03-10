@@ -95,31 +95,28 @@
 <body>
     <div class="register">
         <div class="form">
-    <form action="/RegisterController/register" method="post">
-        <input type="text" name="username" placeholder="请输入用户名">
-        <div th:text="${username}" class="warn"></div></br>
-        <input type="password" name="password" placeholder="请输入密码">
-        <div th:text="${password}" class="warn"></div></br>
-        <input type="password" name="password2" placeholder="确认密码">
-        <div th:text="${password2}" class="warn"></div></br>
-        <select name="professionalType3Id" class="select">
-             <option value="0">请输入专业</option>
-                <option value="1">哲学</option>
-                <option value="2">逻辑学</option>
-            </select></br>
-        <input type="text" name="realName" placeholder="请输入真实姓名">
-        <div th:text="${realName}" class="warn"></div></br>
-        <input type="text" name="birth" placeholder="请输入生日 例如:1997-9-18">
-        <div th:text="${birth}" class="warn"></div></br>
-        <input type="text" name="phone" placeholder="请输入电话">
-        <div th:text="${phone}" class="warn"></div></br>
-        <input type="text" name="email" placeholder="请输入邮箱 例如:1275119618@qq.com">
-        <div th:text="${email}" class="warn"></div></br>
-    <input type="textarea" placeholder="请进行描述" class="description">
-        <button type="submit" class="lg-btn">注册</button>
-        <div th:text="${existedUser}" class="warner"></div>
-    </form>
-</div>
+            <form action="/RegisterController/register" method="post">
+
+                <input type="text" name="username" placeholder="请输入用户名">
+                <div th:text="${username}" class="warn"></div></br>
+                <input type="password" name="password" placeholder="请输入密码">
+                <div th:text="${password}" class="warn"></div></br>
+                <input type="password" name="password2" placeholder="确认密码">
+                <div th:text="${password2}" class="warn"></div></br>
+                <input type="text" name="realName" placeholder="请输入真实姓名">
+                <div th:text="${realName}" class="warn"></div></br>
+                <input type="text" name="birth" placeholder="请输入生日 例如:1997-9-18">
+                <div th:text="${birth}" class="warn"></div></br>
+                <input type="hidden" name="professionalType3Id"  th:value="${id}">
+                <input type="text" name="phone" placeholder="请输入电话">
+                <div th:text="${phone}" class="warn"></div></br>
+                <input type="text" name="email" placeholder="请输入邮箱 例如:1275119618@qq.com">
+                <div th:text="${email}" class="warn"></div></br>
+                <input type="textarea" placeholder="请进行描述" class="description">
+                <button type="submit" class="lg-btn">注册</button>
+                <div th:text="${existedUser}" class="warner"></div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

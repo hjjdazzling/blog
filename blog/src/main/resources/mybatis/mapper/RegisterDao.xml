@@ -3,6 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hjj.blog.register.dao.RegisterDao">
+    <select id="selectProfessionType1" resultType="com.hjj.blog.projo.ProfessionalType1">
+        select id,name from professional_type1
+    </select>
+
+    <select id="selectProfessionType2" resultType="com.hjj.blog.projo.ProfessionalType2">
+        select id,name from professional_type2 where professional_type1_id = #{id}
+    </select>
+
+    <select id="selectProfessionType3" resultType="com.hjj.blog.projo.ProfessionalType3">
+        select id,name from professional_type3 where professional_type2_id = #{id}
+    </select>
+
     <insert id="registerUser" useGeneratedKeys="true" keyProperty="id">
         insert into user(username, password) values(#{username}, #{password});
     </insert>
