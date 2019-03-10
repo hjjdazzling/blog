@@ -25,14 +25,17 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Integer login(User user) {
         Integer result = null;
-        //先取消查缓存，因为缓存设置存在问题
-        //result = loginCache.login(user);
+        //先查缓存
+        result = loginCache.login(user);
 
         //先查缓存 null
         if (result == null) {
+
             result = loginDao.login(user);
 
             if (result != null && result > 0) {
+
+                user.setId(result);
                 loginCache.loginCacheUser(user);
             }
 
@@ -42,7 +45,6 @@ public class LoginServiceImpl implements LoginService {
             result = 1;
         }
 
-        user.setId(result);
         return result;
     }
 }

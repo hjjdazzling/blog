@@ -1,11 +1,12 @@
 package com.hjj.blog.projo;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.io.Serializable;
 
 /**
  * Created by haojunjie on 2019/2/25
  */
-public class ProfessionalType3 {
+public class ProfessionalType3  {
     private Integer id;
     private Integer professionalType2Id;
     private String name;

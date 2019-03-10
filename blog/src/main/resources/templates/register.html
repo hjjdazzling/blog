@@ -3,33 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
+    <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .register {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #2f4050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('/images/1.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+.form{
+  width: 25%;
+  height: 87%;
+  background-color: #eee;
+  box-sizing: border-box;
+  border-radius: 2%;
+  position: relative;
+  box-shadow: 0 5px 5px 5px #ccc inset;
+  opacity: 1.1;
+  padding-top: 3vh;
+}
+.register .form  input{
+
+  display: block;
+  margin: 0 auto;
+  width: 73%;
+  height: 32px;
+  border-radius: 10px;
+  border: 0;
+  outline: none;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding-left: 7px;
+ 
+}
+   .register .form input:focus {
+  border: 1px solid blue!important;}
+  .form .lg-btn {
+  width: 73%;
+  height: 32px;
+  border-radius: 10px;
+  border: 0;
+  outline: none;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 2vh;
+  margin-top: 26px;
+  background-color: #0D50BB;
+}
+.description{height: 90px；}
+  .register  .form  .warn{
+    float: left;
+    margin-left: 7vh;
+    color: red;
+    font-size: 2vh;
+}
+.register .form .warner{
+    width: 100%;
+  height: 30px;
+  color: red;
+  position: absolute;
+  font-size: 2vh;
+  text-align: center;
+  margin-top: 1vh;
+}
+.select{
+   display: block;
+  margin: 0 auto;
+  width: 73%;
+  height: 32px;
+  border-radius: 10px;
+  border: 0;
+  outline: none;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding-left: 7px;
+}
+
+    </style>
 </head>
 <body>
+    <div class="register">
+        <div class="form">
     <form action="/RegisterController/register" method="post">
-        用户名:<input type="text" name="username">
-        <div th:text="${username}"></div><br/>
-        密码:<input type="password" name="password">
-        <div th:text="${password}"></div><br/>
-        密码:<input type="password" name="password2">
-        <div th:text="${password2}"></div><br/>
-        专业:<select name="professionalType3Id">
+        <input type="text" name="username" placeholder="请输入用户名">
+        <div th:text="${username}" class="warn"></div></br>
+        <input type="password" name="password" placeholder="请输入密码">
+        <div th:text="${password}" class="warn"></div></br>
+        <input type="password" name="password2" placeholder="确认密码">
+        <div th:text="${password2}" class="warn"></div></br>
+        <select name="professionalType3Id" class="select">
+             <option value="0">请输入专业</option>
                 <option value="1">哲学</option>
                 <option value="2">逻辑学</option>
-            </select>
-        <br/>
-        真实姓名:<input type="text" name="realName"/>
-        <div th:text="${realName}"></div>
-        <br/>
-        生日:<input type="text" name="birth">例如:1997-9-1
-        <div th:text="${birth}"></div><br/>
-        电话:<input type="text" name="phone">
-        <div th:text="${phone}"></div><br/>
-        邮箱:<input type="text" name="email">
-        <div th:text="${email}"></div><br/>
-        描述:<textarea name ="description" cols="30" rows="3">
-    </textarea>
-        <input type="submit" value="确认"/>
-        <div th:text="${existedUser}"></div>
+            </select></br>
+        <input type="text" name="realName" placeholder="请输入真实姓名">
+        <div th:text="${realName}" class="warn"></div></br>
+        <input type="text" name="birth" placeholder="请输入生日 例如:1997-9-18">
+        <div th:text="${birth}" class="warn"></div></br>
+        <input type="text" name="phone" placeholder="请输入电话">
+        <div th:text="${phone}" class="warn"></div></br>
+        <input type="text" name="email" placeholder="请输入邮箱 例如:1275119618@qq.com">
+        <div th:text="${email}" class="warn"></div></br>
+    <input type="textarea" placeholder="请进行描述" class="description">
+        <button type="submit" class="lg-btn">注册</button>
+        <div th:text="${existedUser}" class="warner"></div>
     </form>
+</div>
+    </div>
 </body>
 </html>

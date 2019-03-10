@@ -6,12 +6,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by haojunjie on 2019/2/25
  */
-public class UserInformation {
+public class UserInformation  {
     private Integer id;
     private Integer user_id;
     private Integer professionalType3Id;

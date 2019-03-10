@@ -1,10 +1,12 @@
 package com.hjj.blog.projo;
 
+import java.io.Serializable;
+
 /**
  * @author haojunjie
  * @create 2019-03-08 19:02
  */
-public class ArticleType {
+public class ArticleType  {
     private int id;
     private int userId;
     private String type;

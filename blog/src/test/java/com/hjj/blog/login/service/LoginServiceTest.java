@@ -23,15 +23,11 @@ public class LoginServiceTest {
 
         System.out.println(id);
 
-        id = loginService.login(new User("dazzling", "dazzling"));
+        id = loginService.login(new User("haojunjie", "123"));
 
         System.out.println(id);
 
         id = loginService.login(new User("haojunjie", "haojunjie"));
-
-        System.out.println(id);
-
-        id = loginService.login(new User("dazzling", "dazzling"));
 
         System.out.println(id);
     }

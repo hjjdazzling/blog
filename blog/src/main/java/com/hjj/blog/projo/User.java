@@ -3,6 +3,8 @@ package com.hjj.blog.projo;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.io.Serializable;
+
 
 /**
  * Created by haojunjie on 2019/2/23

@@ -1,9 +1,11 @@
 package com.hjj.blog.projo;
 
+import java.io.Serializable;
+
 /**
  * Created by haojunjie on 2019/2/25
  */
-public class UserAttentionFans {
+public class UserAttentionFans  {
     private Integer id;
     private Integer user1Id;
     private Integer user2Id;

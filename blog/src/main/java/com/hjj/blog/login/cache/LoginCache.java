@@ -2,10 +2,13 @@ package com.hjj.blog.login.cache;
 
 import com.hjj.blog.projo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
+import javax.jws.soap.SOAPBinding;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -15,8 +18,10 @@ import java.util.concurrent.TimeUnit;
  */
 @Repository("loginCache")
 public class LoginCache {
+
     @Autowired
-    public RedisTemplate<String, String> redisTemplate;
+    @Qualifier("userRedisTemplate")
+    public RedisTemplate<String, Map<String, User>> redisTemplate;
 
     /**
      * 返回  null 不存在  需要查找数据库
@@ -38,7 +43,7 @@ public class LoginCache {
             return null;
         } else {
             Map<Object, Object> map = redisTemplate.opsForHash().entries("user");
-            redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(User.class));
+
             User userCache = (User)map.get(user.getUsername());
 
             if (userCache == null) {
@@ -55,10 +60,6 @@ public class LoginCache {
     }
 
     public void loginCacheUser(User user) {
-        Map<Object, Object> map = redisTemplate.opsForHash().entries("user");
-        map.put(user.getUsername(), user.getPassword());
-
-        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(User.class));
         //将结果缓存起来
         redisTemplate.opsForHash().put("user", user.getUsername(), user);
     }

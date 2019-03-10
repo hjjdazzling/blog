@@ -52,6 +52,8 @@ public class LoginController {
         }
 
         Integer id = loginService.login(user);
+        user.setId(id);
+
         if (id == null || id < 0) {
 
             request.setAttribute("error", "用户名或者密码不正确");
@@ -68,13 +70,16 @@ public class LoginController {
                     (ConcurrentHashMap<String, HttpSession>)servletContext.getAttribute("loginUsers");
 
             if (loginUsers.get(user.getUsername()) == null) {
+
                 session.setAttribute("user", user);
                 loginUsers.put(user.getUsername(), session);
             } else {
                 HttpSession sessionOld = loginUsers.get(user.getUsername());
                 sessionOld.invalidate();
 
+                session.setAttribute("user", user);
                 loginUsers.put(user.getUsername(), session);
+
             }
 
 

@@ -1,9 +1,11 @@
 package com.hjj.blog.projo;
 
+import java.io.Serializable;
+
 /**
  * Created by haojunjie on 2019/2/25
  */
-public class ProfessionalType2 {
+public class ProfessionalType2  {
     private Integer id;
     private Integer professionalType1Id;
     private String name;
