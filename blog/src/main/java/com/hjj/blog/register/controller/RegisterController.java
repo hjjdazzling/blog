@@ -25,7 +25,6 @@ public class RegisterController {
 
     @RequestMapping("/register.html")
     public String getRegister(@RequestParam("professionType3Id") Integer id, HttpServletRequest request) {
-        System.out.println(id);
         request.setAttribute("id", id);
         return "register";
     }
@@ -91,7 +90,7 @@ public class RegisterController {
         }
 
         registerService.registerUser(user);
-        userInformation.setUser_id(user.getId());
+        userInformation.setUserId(user.getId());
         registerService.registerUserInformation(userInformation);
 
 

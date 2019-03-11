@@ -84,7 +84,7 @@ public class LoginController {
 
 
 
-            return "write";
+            return "select";
         }
     }
 }

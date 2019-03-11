@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjj.blog.modify.personal.dao.PersonalInformationDao">
+
+    <update id="updateUser">
+        update user set  password = #{password} where id = #{id}
+    </update>
+    
+    <update id="updateUserInformation">
+        update user_information set professional_type3_id = #{professionalType3Id},real_name = #{realName},
+        phone = #{phone},email = #{email},birth = #{birth, jdbcType=DATE},description = #{description}
+        where user_id = #{userId}
+    </update>
+
+    <select id="selectUserInformation" resultType="com.hjj.blog.projo.UserInformation">
+       select professional_type3_id,real_name,phone,email,description,birth
+       from user_information where user_id = #{id}
+    </select>
+</mapper>

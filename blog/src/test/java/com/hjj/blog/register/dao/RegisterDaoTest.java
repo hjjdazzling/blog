@@ -49,7 +49,7 @@ public class RegisterDaoTest {
     @Test
     public void registerUserInformationTest() {
         UserInformation userInformation = new UserInformation();
-        userInformation.setUser_id(3);
+        userInformation.setUserId(3);
         userInformation.setProfessionalType3Id(2);
         userInformation.setRealName("dazzling");
         userInformation.setBirth(new Date());

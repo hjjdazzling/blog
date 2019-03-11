@@ -7,9 +7,9 @@ import java.io.Serializable;
  * @create 2019-03-08 19:02
  */
 public class ArticleType  {
-    private int id;
-    private int userId;
-    private String type;
+    private Integer id;
+    private Integer userId;
+    private String typeName;
 
     public ArticleType() {
     }
@@ -19,31 +19,31 @@ public class ArticleType  {
         return "ArticleType{" +
                 "id=" + id +
                 ", user_id=" + userId +
-                ", type='" + type + '\'' +
+                ", typeName='" + typeName + '\'' +
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public String getType() {
-        return type;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

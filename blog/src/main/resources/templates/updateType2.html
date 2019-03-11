@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>selectType3</title>
+    <title>updateType2</title>
 </head>
 <body>
-    <form action="/RegisterController/register.html">
+    <form action="/PersonalInformationChangeController/updateProfessionType3">
         请选择你的专业类型,方便我们更好的服务,谢谢<br/>
-        <div th:each="type:${professionType3}">
-            <input type="radio"  name="professionType3Id"
-                th:value="${type.id}" th:text="${type.name}">
+        <div th:each="type:${professionType2}">
+            <input type="radio"  name="professionType2Id"
+                   th:value="${type.id}" th:text="${type.name}">
             <br/>
         </div>
         <input type="submit" value="确认"/>

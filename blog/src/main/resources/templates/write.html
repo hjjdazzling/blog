@@ -38,18 +38,25 @@
     </script>
 </head>
 <body>
-<form method="post" action="/save" >
+<form method="post" action="/editController/save" >
     <div class="container">
         <br/>
         <br/>
         <div class="row">
             <div class="col-lg-6">
                 <div class="input-group">
+                    <div th:text="${contentError}"></div>
+                    <div th:text="${titleError}"></div>
                     类型:<select name="articleTypeId">
-                    <option value="1">哲学</option>
-                    <option value="2">逻辑学</option>
+                        <div th:each="type:${session.articleTypes}">
+                            <option th:value="${type.id}">[[${type.typeName}]]</option>
+                        </div>
                     </select>
                     标题:<input type="text"  name="title" th:value="${title}"/>
+                    是否私密<select name="priacy">
+                                <option value="false">公开</option>
+                                <option value="true">私密</option>
+                            </select>
                 </div>
             </div>
         </div>

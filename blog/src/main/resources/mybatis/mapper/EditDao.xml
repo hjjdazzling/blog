@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjj.blog.edit.dao.EditDao">
+    <select id="getAll" resultType="com.hjj.blog.projo.ArticleType">
+        select id,type_name from article_type where user_id = #{id}
+    </select>
+
+    <insert id="save">
+        insert into article(user_id, article_type_id, title,priacy, update_time, content)
+        values(#{userId}, #{articleTypeId}, #{title},#{priacy}, #{date}, #{content})
+    </insert>
+</mapper>

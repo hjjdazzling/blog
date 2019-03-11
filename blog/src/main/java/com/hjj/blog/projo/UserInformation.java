@@ -3,10 +3,7 @@ package com.hjj.blog.projo;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +11,7 @@ import java.util.Date;
  */
 public class UserInformation  {
     private Integer id;
-    private Integer user_id;
+    private Integer userId;
     private Integer professionalType3Id;
     @NotBlank(message = "请输入你的真实姓名")
     private String realName;
@@ -36,7 +33,7 @@ public class UserInformation  {
     public String toString() {
         return "UserInformation{" +
                 "id=" + id +
-                ", user_id=" + user_id +
+                ", userId=" + userId +
                 ", professionalType3Id=" + professionalType3Id +
                 ", realName='" + realName + '\'' +
                 ", birth=" + birth +
@@ -48,7 +45,7 @@ public class UserInformation  {
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -56,15 +53,15 @@ public class UserInformation  {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public int getProfessionalType3Id() {
+    public Integer getProfessionalType3Id() {
         return professionalType3Id;
     }
 
@@ -104,7 +101,7 @@ public class UserInformation  {
         this.email = email;
     }
 
-    public int getAttentionNumber() {
+    public Integer getAttentionNumber() {
         return attentionNumber;
     }
 
@@ -112,7 +109,7 @@ public class UserInformation  {
         this.attentionNumber = attentionNumber;
     }
 
-    public int getFansNumber() {
+    public Integer getFansNumber() {
         return fansNumber;
     }
 

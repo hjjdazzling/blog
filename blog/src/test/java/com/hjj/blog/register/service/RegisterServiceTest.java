@@ -32,7 +32,7 @@ public class RegisterServiceTest {
 
 
         UserInformation userInformation = new UserInformation();
-        userInformation.setUser_id(user.getId());
+        userInformation.setUserId(user.getId());
         userInformation.setProfessionalType3Id(1);
         userInformation.setRealName("郝俊杰");
         userInformation.setBirth(new Date());
