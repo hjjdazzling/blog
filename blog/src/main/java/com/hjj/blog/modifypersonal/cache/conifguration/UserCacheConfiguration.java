@@ -1,4 +1,4 @@
-package com.hjj.blog.modify.personal.cache.conifguration;
+package com.hjj.blog.modifypersonal.cache.conifguration;
 
 import com.hjj.blog.projo.User;
 import org.springframework.context.annotation.Bean;

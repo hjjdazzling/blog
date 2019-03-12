@@ -19,7 +19,7 @@ public class Article  {
     private Integer negativeNumber;
     private Integer viewCount;
     private boolean priacy;
-    private Date date;
+    private Date updateTime;
     @NotBlank(message = "博客内容不能为空")
     private String content;
 
@@ -37,7 +37,7 @@ public class Article  {
                 ", negativeNumber=" + negativeNumber +
                 ", viewCount=" + viewCount +
                 ", priacy=" + priacy +
-                ", date=" + date +
+                ", date=" + updateTime +
                 ", content='" + content + '\'' +
                 '}';
     }
@@ -106,12 +106,12 @@ public class Article  {
         this.priacy = priacy;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getContent() {

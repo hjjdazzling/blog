@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>文章类型</title>
+</head>
+<body>
+    <form method="post" action="/ArticleTypeController/addArticleType">
+        <input type="hidden" name="userId" th:value="${session.user.id}">
+        <input type="text" name="typeName">
+        <input type="submit" value="添加分类"/>
+    </form>
+    <div th:text="${typeNameError1}"></div>
+    <table>
+        <tr>
+            <td>类别</td>
+            <td>更新</td>
+            <td>删除</td>
+        </tr>
+        <div th:each="type:${session.articleTypes}">
+            <tr>
+                <td>[[${type.typeName}]]</td>
+                <td>
+                    <form action="/ArticleTypeController/updateArticleType" method="post">
+                        <input type="hidden" name="id" th:value="${type.id}">
+                        <input type="text" name="typeName" placeholder="请输入新的名字">
+                        <input type="submit" value="确认">
+                    </form>
+                </td>
+                <td>
+                    <form action="/ArticleTypeController/deleteArticleType" method="post">
+                        <input type="hidden" name="id" th:value="${type.id}">
+                        <input type="submit" value="删除">
+                    </form>
+                </td>
+            </tr>
+        </div>
+    </table>
+    <div th:text="${typeNameError2}"></div>
+</body>
+</html>

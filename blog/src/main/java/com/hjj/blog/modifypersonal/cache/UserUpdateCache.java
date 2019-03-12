@@ -1,4 +1,4 @@
-package com.hjj.blog.modify.personal.cache;
+package com.hjj.blog.modifypersonal.cache;
 
 import com.hjj.blog.projo.User;
 import org.springframework.beans.factory.annotation.Autowired;

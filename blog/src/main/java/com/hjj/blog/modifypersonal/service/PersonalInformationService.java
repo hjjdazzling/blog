@@ -1,7 +1,7 @@
-package com.hjj.blog.modify.personal.service;
+package com.hjj.blog.modifypersonal.service;
 
-import com.hjj.blog.modify.personal.cache.UserUpdateCache;
-import com.hjj.blog.modify.personal.dao.PersonalInformationDao;
+import com.hjj.blog.modifypersonal.cache.UserUpdateCache;
+import com.hjj.blog.modifypersonal.dao.PersonalInformationDao;
 import com.hjj.blog.projo.*;
 import com.hjj.blog.register.dao.RegisterDao;
 import org.springframework.beans.factory.annotation.Autowired;

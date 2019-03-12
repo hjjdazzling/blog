@@ -1,6 +1,6 @@
-package com.hjj.blog.modify.personal.controller;
+package com.hjj.blog.modifypersonal.controller;
 
-import com.hjj.blog.modify.personal.service.PersonalInformationService;
+import com.hjj.blog.modifypersonal.service.PersonalInformationService;
 import com.hjj.blog.projo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

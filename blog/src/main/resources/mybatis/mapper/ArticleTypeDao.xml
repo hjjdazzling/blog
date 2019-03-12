@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjj.blog.articletype.dao.ArticleTypeDao">
+    <select id="getArticleType" resultType="com.hjj.blog.projo.ArticleType">
+        select id,user_id,type_name from article_type where user_id = #{id}
+    </select>
+
+    <insert id="addArticleType" useGeneratedKeys="true" keyProperty="id">
+        insert into article_type(user_id, type_name) values(#{userId}, #{typeName})
+    </insert>
+
+    <delete id="deleteArticleType">
+        delete from article_type where id=#{id}
+    </delete>
+
+    <update id="updateArticleType">
+        update article_type set type_name = #{typeName} where id = #{id}
+    </update>
+</mapper>

@@ -1,5 +1,7 @@
 package com.hjj.blog.projo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ import java.io.Serializable;
 public class ArticleType  {
     private Integer id;
     private Integer userId;
+    @NotBlank(message = "类别名不能为空")
     private String typeName;
 
     public ArticleType() {

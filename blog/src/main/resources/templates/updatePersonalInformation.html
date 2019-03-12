@@ -102,7 +102,7 @@
                 <div th:text="${password2}" class="warn"></div></br>
                 <input type="text" name="realName" th:value = "${userInformation.realName}" >
                 <div th:text="${realName}" class="warn"></div></br>
-                <input type="text" name="birth" th:value="${userInformation.birth}">
+                <input type="text" name="birth" placeholder="请输入生日 例如:1997-9-18">
                 <div th:text="${birth}" class="warn"></div></br>
                 <input type="hidden" name="professionalType3Id"  th:value="${id}">
                 <input type="text" name="phone" th:value="${userInformation.phone}">

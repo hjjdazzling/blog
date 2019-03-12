@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 
@@ -57,7 +58,7 @@ public class EditController {
 
         User user = (User)session.getAttribute("user");
         article.setUserId(user.getId());
-
+        article.setUpdateTime(new Date());
         editService.save(article);
         //将markDown语法转变成html语法
         PegDownProcessor  peg=new PegDownProcessor();

@@ -9,6 +9,6 @@
 
     <insert id="save">
         insert into article(user_id, article_type_id, title,priacy, update_time, content)
-        values(#{userId}, #{articleTypeId}, #{title},#{priacy}, #{date}, #{content})
+        values(#{userId}, #{articleTypeId}, #{title},#{priacy}, #{updateTime}, #{content})
     </insert>
 </mapper>

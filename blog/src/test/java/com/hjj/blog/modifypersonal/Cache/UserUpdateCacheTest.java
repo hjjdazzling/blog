@@ -1,6 +1,6 @@
-package com.hjj.blog.modify.personal.Cache;
+package com.hjj.blog.modifypersonal.Cache;
 
-import com.hjj.blog.modify.personal.cache.UserUpdateCache;
+import com.hjj.blog.modifypersonal.cache.UserUpdateCache;
 import com.hjj.blog.projo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;

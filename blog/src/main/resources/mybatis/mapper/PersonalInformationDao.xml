@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hjj.blog.modify.personal.dao.PersonalInformationDao">
+<mapper namespace="com.hjj.blog.modifypersonal.dao.PersonalInformationDao">
 
     <update id="updateUser">
         update user set  password = #{password} where id = #{id}

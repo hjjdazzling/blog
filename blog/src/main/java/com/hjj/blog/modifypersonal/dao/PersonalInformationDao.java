@@ -1,4 +1,4 @@
-package com.hjj.blog.modify.personal.dao;
+package com.hjj.blog.modifypersonal.dao;
 
 import com.hjj.blog.projo.User;
 import com.hjj.blog.projo.UserInformation;
