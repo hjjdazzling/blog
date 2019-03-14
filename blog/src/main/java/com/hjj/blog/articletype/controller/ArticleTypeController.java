@@ -101,8 +101,15 @@ public class ArticleTypeController {
         //更新session中的信息
         List<ArticleType> articleTypes = (List<ArticleType>)session.getAttribute("articleTypes");
 
+        for (int i=0; i<articleTypes.size(); i++) {
+            if(articleType.getTypeName().equals(articleTypes.get(i).getTypeName())
+                    && articleType.getUserId() == articleTypes.get(i).getUserId()) {
+                request.setAttribute( "typeNameError1", "类型名不能重名");
+                return "articleType";
+            }
+        }
+
         articleTypeService.addArticleType(articleType);
-        System.out.println(articleType);
         articleTypes.add(articleType);
         session.setAttribute("articleTypes", articleTypes);
 

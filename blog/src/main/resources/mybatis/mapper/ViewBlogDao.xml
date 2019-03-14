@@ -8,4 +8,7 @@
         from article where user_id =#{userId}
     </select>
 
+    <select id="getArticleContent" resultType="java.lang.String">
+        select content from article where id = #{id};
+    </select>
 </mapper>

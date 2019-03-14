@@ -1,4 +1,4 @@
-package com.hjj.blog.viewblog.dao;
+package com.hjj.blog.search.dao;
 
 import com.hjj.blog.projo.Article;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,12 +8,10 @@ import java.util.List;
 
 /**
  * @author haojunjie
- * @create 2019-03-12 16:59
+ * @create 2019-03-14 15:24
  */
 @Mapper
 @Repository
-public interface ViewBlogDao {
-    public List<Article> getArticle(int userId);
-
-    public String getArticleContent(int id);
+public interface SearchDao {
+    public List<Article> selectArticle(Article article);
 }

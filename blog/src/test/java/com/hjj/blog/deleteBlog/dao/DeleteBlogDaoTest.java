@@ -1,28 +1,25 @@
-package com.hjj.blog.viewblog.dao;
+package com.hjj.blog.deleteBlog.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Repository;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author haojunjie
- * @create 2019-03-12 17:08
+ * @create 2019-03-13 15:08
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ViewBlogDaoTest {
+public class DeleteBlogDaoTest {
     @Autowired
-    ViewBlogDao viewBlogDao;
+    DeleteBlogDao deleteBlogDao;
 
     @Test
-    public void getTitleTest() {
-        System.out.println(viewBlogDao.getArticle(1));
-    }
-
-    @Test
-    public void getArticleContentTest() {
-        System.out.println(viewBlogDao.getArticleContent(1));
+    public void deleteBlogById() {
+        System.out.println(deleteBlogDao.deleteBlogById(3));
     }
 }

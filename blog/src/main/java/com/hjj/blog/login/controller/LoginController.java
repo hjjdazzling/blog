@@ -75,14 +75,12 @@ public class LoginController {
                 loginUsers.put(user.getUsername(), session);
             } else {
                 HttpSession sessionOld = loginUsers.get(user.getUsername());
-                sessionOld.invalidate();
-
-                session.setAttribute("user", user);
-                loginUsers.put(user.getUsername(), session);
-
+                if (sessionOld != session) {
+                    sessionOld.invalidate();
+                    session.setAttribute("user", user);
+                    loginUsers.put(user.getUsername(), session);
+                }
             }
-
-
 
             return "select";
         }

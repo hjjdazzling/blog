@@ -3,6 +3,7 @@ package com.hjj.blog.projo;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author haojunjie
@@ -15,6 +16,22 @@ public class ArticleType  {
     private String typeName;
 
     public ArticleType() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArticleType that = (ArticleType) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(userId, that.userId) &&
+                Objects.equals(typeName, that.typeName);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, userId, typeName);
     }
 
     @Override

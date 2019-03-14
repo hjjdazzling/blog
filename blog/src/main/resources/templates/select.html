@@ -8,6 +8,13 @@
     <a href="/PersonalInformationChangeController/updateProfessionType1">修改个人信息</a>
     <a href="/editController/write">写博客</a>
     <a href="/ArticleTypeController/articleType.html">分类管理</a>
-    <a href="">查看博客</a>
+    <a href="/viewBlogController/getArticle?pageNum=1&pageSize=1">我的博客</a>
+
+    <form action="/SearchController/search" method="post">
+        文章名:<input type="text"  name="title">
+        文章类型:<input type="hidden" name="articleType" value="1">
+        用户:<input type="hidden" name="userName" value="1">
+        <input type="submit" value="搜索"><br/>
+    </form>
 </body>
 </html>

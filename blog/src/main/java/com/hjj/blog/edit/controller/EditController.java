@@ -29,6 +29,8 @@ import java.util.List;
 public class EditController {
     @Autowired
     public EditService editService;
+    @Autowired
+    private PegDownProcessor  peg;
 
     @RequestMapping("/write")
     public String write(HttpServletRequest request, HttpSession session) {
@@ -61,7 +63,6 @@ public class EditController {
         article.setUpdateTime(new Date());
         editService.save(article);
         //将markDown语法转变成html语法
-        PegDownProcessor  peg=new PegDownProcessor();
         String html =peg.markdownToHtml(article.getContent());
         request.setAttribute("content", html);
 
