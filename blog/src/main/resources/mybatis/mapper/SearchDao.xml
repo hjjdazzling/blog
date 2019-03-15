@@ -10,15 +10,28 @@
             <if test="title != null and title.trim() != &quot;&quot;">
                 title like '%${title}%'
             </if>
-            <if test="articleTypeId != null">
-                and article_type_id = #{articleTypeId}
+            <if test="articleTypes != null">
+                and article_type_id IN
+                <foreach collection="articleTypes" separator="," item="id" open="(" close=")">
+                    #{id}
+                </foreach>
             </if>
-            <if test="userId">
-                and user_id = #{userId}
+            <if test="usernames != null">
+                and user_id IN
+                <foreach collection="usernames" separator="," item="id" open="(" close=")">
+                    #{id}
+                </foreach>
             </if>
             and priacy = 0
         </where>
         order by praise_number DESC, view_count DESC, negative_number ASC
     </select>
 
+    <select id="selectUserName" resultType="java.lang.Integer">
+        select id from user where username like '%${username}%'
+    </select>
+
+    <select id="selectArticleType" resultType="java.lang.Integer">
+        select id from article_type where type_name like '%${articleType}%'
+    </select>
 </mapper>

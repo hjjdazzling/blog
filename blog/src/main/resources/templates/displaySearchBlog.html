@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索博客</title>
+</head>
+<body>
+    <div th:each="article:${session.searchArticles}">
+        <a th:href="@{/viewBlogController/getArticleContent(id=${article.id})}">
+            [[${article.title}]]
+        </a> &nbsp;&nbsp;
+        <h5>
+            点赞数:[[${article.praiseNumber}]] &nbsp;
+            差赞数:[[${article.negativeNumber}]] &nbsp;
+            更新时间: [[${article.updateTime}]]&nbsp;
+        </h5>
+    </div>
+    <a th:href="@{/SearchController/search(pageNum=${session.searchArticles.pageNum}-1, pageSize=1)}">上一页</a>
+
+    <form action="/viewBlogController/getArticle">
+        <input type="hidden" name="pageSize" value="1">
+        跳转:<input type="text" name="pageNum">页
+        <input type="submit" value="确定">
+    </form>
+
+    <a th:href="@{/SearchController/search(pageNum=${session.searchArticles.pageNum}+1, pageSize=1)}">下一页</a>
+    <h5>当前页数:[[${session.searchArticles.pageNum}]] &nbsp;
+        总记录数:[[${session.searchArticles.total}]] &nbsp;
+        总页数:[[${session.searchArticles.pages}]]
+    </h5>
+</body>
+</html>

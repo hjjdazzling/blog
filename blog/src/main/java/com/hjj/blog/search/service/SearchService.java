@@ -2,6 +2,7 @@ package com.hjj.blog.search.service;
 
 import com.github.pagehelper.PageHelper;
 import com.hjj.blog.projo.Article;
+import com.hjj.blog.projo.Search;
 import com.hjj.blog.search.dao.SearchDao;
 import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,11 @@ public class SearchService {
     @Autowired
     private PegDownProcessor peg;
 
-    public List<Article> selectArticle(Article article, int pageNum, int pageSize) {
+    public List<Article> selectArticle(Search search, int pageNum, int pageSize) {
+        List<Integer> usernames = searchDao.selectUserName(search.getUsername());
+        List<Integer> articles = searchDao.selectArticleType(search.getArticleType());
         //使用分页插件
         PageHelper.startPage(pageNum, pageSize);
-        return searchDao.selectArticle(article);
+        return searchDao.selectArticle(search.getTitle(), usernames, articles);
     }
 }

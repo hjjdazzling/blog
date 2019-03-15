@@ -8,6 +8,20 @@
     <title>展示博客</title>
     <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
     <link th:href="@{/bootstrap/css/bootstrap-theme.css}" rel="stylesheet"/>
+    <script type="text/javascript">
+        function changePraisePicture(num) {
+            alert(num);
+            if (num==1 ){
+                document.getElementsByTagName("img")[0].style.display="none";
+                document.getElementsByTagName("img")[1].style.display="block";
+                /SearchController/search
+
+            } else {
+                document.getElementsByTagName("img")[0].style.display="block";
+                document.getElementsByTagName("img")[1].style.display="none";
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -21,6 +35,11 @@
         </div>
     </div>
 </div>
+
+<a href="displaySearchBlog.html">
+    <img src="/images/noPraise.png" onclick="changePraisePicture(1)"/>
+    <img src="/images/yesPraise.png" onclick="changePraisePicture(2)" style="display: none" />
+</a>
 
 <script th:href="@{/jquery-3.2.1.min.js}" type="text/javascript"></script>
 <script th:href="@{/bootstrap/js/bootstrap.js}"></script>

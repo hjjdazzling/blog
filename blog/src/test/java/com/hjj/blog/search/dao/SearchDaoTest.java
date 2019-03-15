@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author haojunjie
  * @create 2019-03-14 15:35
@@ -19,8 +22,65 @@ public class SearchDaoTest {
 
     @Test
     public void selectArticleTest() {
-        Article article = new Article();
-        article.setTitle("测试");
-        System.out.println(searchDao.selectArticle(article));
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(10);
+        list2.add(12);
+
+        List<Article> articles = searchDao.selectArticle("测试", list, list2);
+
+        for(Article article : articles) {
+            System.out.println(article);
+        }
+
+        articles = searchDao.selectArticle("测试", null, list2);
+
+        for(Article article : articles) {
+            System.out.println(article);
+        }
+
+        articles = searchDao.selectArticle("测试", list, null);
+
+        for(Article article : articles) {
+            System.out.println(article);
+        }
+
+        articles = searchDao.selectArticle(null, list, list2);
+
+        for(Article article : articles) {
+            System.out.println(article);
+        }
+
+        articles = searchDao.selectArticle(null, null, list2);
+
+        for(Article article : articles) {
+            System.out.println(article);
+        }
+
+        articles = searchDao.selectArticle(null, list, null);
+
+        for(Article article : articles) {
+            System.out.println(article);
+        }
+
+
+        articles = searchDao.selectArticle("测试", null, null);
+
+        for(Article article : articles) {
+            System.out.println(article);
+        }
+    }
+
+    @Test
+    public void selectUserNameTest() {
+        System.out.println(searchDao.selectUserName("12"));
+    }
+
+    @Test
+    public void selectArticleTypeTest() {
+        System.out.println(searchDao.selectArticleType("e"));
     }
 }
