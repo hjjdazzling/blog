@@ -16,4 +16,16 @@ public interface ViewBlogDao {
     public List<Article> getArticle(int userId);
 
     public String getArticleContent(int id);
+
+    public Integer getArticleUserId(int id);
+
+    public Integer updateArticleViewCount(int id);
+
+    public Integer updateArticlePraiseNumber(int id);
+
+    public Integer updateArticleNegativeNumber(int id);
+
+    public Integer articleAttention(int id);
+
+    public Integer articleCollect(int id);
 }

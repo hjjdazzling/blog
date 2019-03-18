@@ -25,4 +25,14 @@ public class ViewBlogDaoTest {
     public void getArticleContentTest() {
         System.out.println(viewBlogDao.getArticleContent(1));
     }
+
+    @Test
+    public void getArticleUserId() {
+        System.out.println(viewBlogDao.getArticleUserId(8));
+    }
+
+    @Test
+    public void updateArticleViewCountTest() {
+        System.out.println(viewBlogDao.updateArticleViewCount(8));
+    }
 }

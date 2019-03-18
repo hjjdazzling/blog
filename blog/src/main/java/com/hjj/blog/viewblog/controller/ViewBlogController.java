@@ -42,8 +42,16 @@ public class ViewBlogController {
 
     @RequestMapping("/getArticleContent")
     public String getArticleContent(@RequestParam("id") Integer id,
-                                    HttpServletRequest request) {
+                                    HttpServletRequest request,HttpSession session) {
         String content = viewBlogService.getArticleContent(id);
+        //获取当前用户的信息,如果当前用户就是文章的拥有者则浏览数不变,否则+1
+        User user = (User)session.getAttribute("user");
+        //查询文章的拥有者user_id
+        int userId = viewBlogService.getArticleUserId(id);
+        if (user.getId() != userId) {
+            //浏览数+1
+            viewBlogService.updateArticleViewCount(id);
+        }
 
         //将markDown语法转变成html语法
         String html =peg.markdownToHtml(content);
@@ -68,4 +76,5 @@ public class ViewBlogController {
 
         return "write";
     }
+
 }

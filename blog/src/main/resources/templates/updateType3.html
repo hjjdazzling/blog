@@ -3,16 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>updateType3</title>
+    <style type="text/css">
+        .selectType{
+            width: 30%;
+            background-color: #eee;
+            box-sizing: border-box;
+            border-radius: 2%;
+            position: relative;
+            box-shadow: 0 5px 5px 5px #ccc inset;
+            opacity: 1.1;
+            padding: 2vh;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('/images/3.jpg') no-repeat;
+            background-size: cover;
+        }
+        .selectType .sure{
+            width: 50%;
+            height: 5vh;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            display: block;
+            background-color: #2f4050;
+            color: #fff;
+        }
+        .selectType h1{text-align: center;font-size: 2vh;color: #333;}
+        .selectType .sex{
+            margin-left: 5vh;
+            height: 2vh;
+            margin-bottom: 2vh
+        }
+
+
+    </style>
 </head>
 <body>
-    <form action="/PersonalInformationChangeController/selectPersonalInformation">
+    <form action="/PersonalInformationChangeController/selectPersonalInformation" class="selectType">
         请选择你的专业类型,方便我们更好的服务,谢谢<br/>
         <div th:each="type:${professionType3}">
             <input type="radio"  name="professionType3Id"
-                th:value="${type.id}" th:text="${type.name}">
+                th:value="${type.id}" th:text="${type.name}" class="sex">
             <br/>
         </div>
-        <input type="submit" value="确认"/>
+        <input type="submit" value="确认" class="sure"/>
     </form>
 </body>
 </html>

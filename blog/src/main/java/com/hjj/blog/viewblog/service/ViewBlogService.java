@@ -32,4 +32,13 @@ public class ViewBlogService {
         return viewBlogDao.getArticleContent(id);
     }
 
+    public Integer getArticleUserId(int id) {
+        return viewBlogDao.getArticleUserId(id);
+    }
+
+    public Integer updateArticleViewCount(int id) {
+        return viewBlogDao.updateArticleViewCount(id);
+    }
+
+
 }

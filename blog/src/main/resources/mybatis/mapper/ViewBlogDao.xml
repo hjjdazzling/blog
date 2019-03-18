@@ -9,6 +9,14 @@
     </select>
 
     <select id="getArticleContent" resultType="java.lang.String">
-        select content from article where id = #{id};
+        select content from article where id = #{id}
     </select>
+
+    <select id="getArticleUserId" resultType="java.lang.Integer">
+        select user_id from article where id = #{id}
+    </select>
+
+    <update id="updateArticleViewCount">
+        update article set view_count = view_count + 1 where id = #{id}
+    </update>
 </mapper>

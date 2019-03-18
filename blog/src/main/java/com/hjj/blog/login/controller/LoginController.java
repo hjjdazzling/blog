@@ -82,6 +82,8 @@ public class LoginController {
                 }
             }
 
+            session.setMaxInactiveInterval(10);
+
             return "select";
         }
     }

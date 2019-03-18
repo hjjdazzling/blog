@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjj.blog.listener.dao.UserInformationDao">
+
+
+    <select id="getUserInformation2ById" resultType="com.hjj.blog.projo.UserInformation2">
+      select id, user_id, praise_all_id, negative_all_id, collect_all_id, attention_all_id
+      from user_information2 where user_id = #{id}
+    </select>
+
+    <update id="updateUserInformation2">
+        update user_information2 set praise_all_id = #{praiseAllId, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.SetTypeHandler},
+        negative_all_id = #{negativeAllId, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.SetTypeHandler},
+        collect_all_id = #{collectAllId, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.SetTypeHandler},
+        attention_all_id= #{attentionAllId, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.SetTypeHandler}
+        where user_id = #{userId}
+    </update>
+</mapper>
