@@ -37,12 +37,12 @@ public class SearchController {
         if (!(search.getTitle() == null || search.getTitle().trim().equals(""))
                 || !(search.getArticleType() == null || search.getArticleType().trim().equals(""))
                 || !(search.getUsername() == null || search.getUsername().trim().equals(""))) {
-            System.out.println("1" + search);
+
             session.setAttribute("search", search);
 
         } else {
             Search search1 = (Search) session.getAttribute("search");
-            System.out.println("2" + search1);
+
 
             if(search1 != null) {
                 search = search1;

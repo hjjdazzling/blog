@@ -21,26 +21,29 @@
             }
         }
     </script>
+    <script th:href="@{/jquery-3.2.1.min.js}" type="text/javascript"></script>
+    <script th:href="@{/bootstrap/js/bootstrap.js}"></script>
 </head>
 <body>
 
-<div class="container">
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title" th:utext="${title}"></h3>
-        </div>
-        <div class="panel-body">
-            <div th:utext="${content}"></div>
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title" th:utext="${title}"></h3>
+            </div>
+            <div class="panel-body">
+                <div th:utext="${content}"></div>
+            </div>
         </div>
     </div>
-</div>
 
-<a href="displaySearchBlog.html">
-    <img src="/images/noPraise.png" onclick="changePraisePicture(1)"/>
-    <img src="/images/yesPraise.png" onclick="changePraisePicture(2)" style="display: none" />
-</a>
-
-<script th:href="@{/jquery-3.2.1.min.js}" type="text/javascript"></script>
-<script th:href="@{/bootstrap/js/bootstrap.js}"></script>
+   <div th:if="${isSelf} == 'false'">
+        <a href="" th:if="${isPraise} == 'true'">
+            <img src="/images/yesPraise.png">
+        </a>
+        <a href="" th:if="${isPraise} == 'false'">
+            <img src="/images/noPraise.png">
+        </a>
+   </div>
 </body>
 </html>

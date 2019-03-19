@@ -24,7 +24,8 @@
     </form>
 
     <a th:href="@{/SearchController/search(pageNum=${session.searchArticles.pageNum}+1, pageSize=1)}">下一页</a>
-    <h5>当前页数:[[${session.searchArticles.pageNum}]] &nbsp;
+    <h5>
+        当前页数:[[${session.searchArticles.pageNum}]] &nbsp;
         总记录数:[[${session.searchArticles.total}]] &nbsp;
         总页数:[[${session.searchArticles.pages}]]
     </h5>

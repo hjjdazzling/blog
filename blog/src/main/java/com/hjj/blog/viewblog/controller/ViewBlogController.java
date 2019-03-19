@@ -4,6 +4,7 @@ import com.hjj.blog.edit.service.EditService;
 import com.hjj.blog.projo.Article;
 import com.hjj.blog.projo.ArticleType;
 import com.hjj.blog.projo.User;
+import com.hjj.blog.projo.UserInformation2;
 import com.hjj.blog.viewblog.service.ViewBlogService;
 import org.hibernate.validator.constraints.Email;
 import org.pegdown.PegDownProcessor;
@@ -48,6 +49,7 @@ public class ViewBlogController {
         User user = (User)session.getAttribute("user");
         //查询文章的拥有者user_id
         int userId = viewBlogService.getArticleUserId(id);
+        System.out.println("getArticleContent     " + user);
         if (user.getId() != userId) {
             //浏览数+1
             viewBlogService.updateArticleViewCount(id);
@@ -56,7 +58,26 @@ public class ViewBlogController {
         //将markDown语法转变成html语法
         String html =peg.markdownToHtml(content);
         request.setAttribute("content", html);
+        UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
+        System.out.println("getArticleContent     " + userInformation2);
+        if (userInformation2.getPraiseAllId() != null && userInformation2.getPraiseAllId().contains(id)) {
+            request.setAttribute("isPraise", "true");
+        } else {
+            request.setAttribute("isPraise", "false");
+        }
 
+        //是不是本人
+        boolean isSelf = false;
+
+        if (user.getId() == userId) {
+            isSelf = true;
+        }
+
+        if (isSelf) {
+            request.setAttribute("isSelf", "true");
+        } else {
+            request.setAttribute("isSelf", "false");
+        }
         return "display";
     }
 
@@ -73,7 +94,6 @@ public class ViewBlogController {
         String content = viewBlogService.getArticleContent(id);
         request.setAttribute("content", content);
         request.setAttribute("title", title);
-
         return "write";
     }
 

@@ -17,4 +17,12 @@
         attention_all_id= #{attentionAllId, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.SetTypeHandler}
         where user_id = #{userId}
     </update>
+
+    <insert id="addUserInformation2">
+        insert into user_information2(user_id, praise_all_id, negative_all_id, collect_all_id, attention_all_id)
+        values(#{userId}, #{praiseAllId, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.SetTypeHandler},
+        #{negativeAllId, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.SetTypeHandler},
+        #{collectAllId, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.SetTypeHandler},
+        #{attentionAllId, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.SetTypeHandler});
+    </insert>
 </mapper>

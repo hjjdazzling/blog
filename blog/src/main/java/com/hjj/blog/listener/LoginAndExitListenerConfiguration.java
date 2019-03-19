@@ -1,6 +1,7 @@
 package com.hjj.blog.listener;
 
 import com.hjj.blog.listener.service.UserInformationService;
+import com.hjj.blog.projo.UserInformation2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

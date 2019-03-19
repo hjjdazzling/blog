@@ -43,12 +43,8 @@ public class LoginAndExitListener implements HttpSessionListener,
     }
 
     @Override
-    public void attributeRemoved(HttpSessionBindingEvent httpSessionBindingEvent) {
-
-    }
+    public void attributeRemoved(HttpSessionBindingEvent httpSessionBindingEvent) {}
 
     @Override
-    public void attributeReplaced(HttpSessionBindingEvent httpSessionBindingEvent) {
-
-    }
+    public void attributeReplaced(HttpSessionBindingEvent httpSessionBindingEvent) {}
 }

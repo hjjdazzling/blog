@@ -4,6 +4,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hjj.blog.projo.Article;
+import com.hjj.blog.projo.UserInformation2;
+import com.hjj.blog.viewblog.cache.ViewBlogCache;
 import com.hjj.blog.viewblog.dao.ViewBlogDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ import java.util.List;
 public class ViewBlogService {
     @Autowired
     private  ViewBlogDao viewBlogDao;
+    @Autowired
+    private ViewBlogCache viewBlogCache;
 
     public List<Article> getArticle(Integer userId,int pageNum, int pageSize) {
         //使用分页插件
@@ -41,4 +45,7 @@ public class ViewBlogService {
     }
 
 
+    public UserInformation2 getUserInformation2ByIdFromCache(Integer userId) {
+        return viewBlogCache.getUserInformation2(userId);
+    }
 }

@@ -17,4 +17,6 @@ public interface UserInformationDao {
 
     public void updateUserInformation2(UserInformation2 userInformation2);
 
+    public void addUserInformation2(UserInformation2 userInformation2);
+
 }

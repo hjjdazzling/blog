@@ -51,7 +51,7 @@ public class LoginCache {
             }
 
             if (user.getPassword().equals(userCache.getPassword())) {
-                return 1;
+                return userCache.getId();
             } else {
                 return 0;
             }
