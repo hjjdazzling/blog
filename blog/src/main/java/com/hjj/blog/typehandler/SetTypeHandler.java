@@ -20,7 +20,6 @@ import java.util.Set;
  * @create 2019-03-14 11:19
  */
 public class SetTypeHandler implements TypeHandler<Set<Integer>> {
-    private Set<Integer> set = new HashSet<>();
 
     @Override
     public void setParameter(PreparedStatement preparedStatement, int i, Set<Integer> integers, JdbcType jdbcType) throws SQLException {
@@ -29,6 +28,7 @@ public class SetTypeHandler implements TypeHandler<Set<Integer>> {
 
     @Override
     public Set<Integer> getResult(ResultSet resultSet, String s) throws SQLException {
+        Set<Integer> set = new HashSet<>();
         JSONArray jsonObject = JSONArray.parseArray(resultSet.getString(s));
         Object[] obj = jsonObject.toArray();
 
@@ -40,6 +40,7 @@ public class SetTypeHandler implements TypeHandler<Set<Integer>> {
 
     @Override
     public Set<Integer> getResult(ResultSet resultSet, int i) throws SQLException {
+        Set<Integer> set = new HashSet<>();
         JSONArray jsonObject = JSONArray.parseArray(resultSet.getString(i));
         Object[] obj = jsonObject.toArray();
 

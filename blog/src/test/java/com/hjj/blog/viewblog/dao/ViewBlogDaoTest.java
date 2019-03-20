@@ -35,4 +35,17 @@ public class ViewBlogDaoTest {
     public void updateArticleViewCountTest() {
         System.out.println(viewBlogDao.updateArticleViewCount(8));
     }
+
+    @Test
+    public void updateArticlePraiseNumber() {
+//        int id = 8;
+//        int count = -1;
+//
+//        viewBlogDao.updateArticlePraiseNumber(id, count);
+
+        int id = 8;
+        int count = -1;
+
+        viewBlogDao.updateArticlePraiseNumber(id, count);
+    }
 }

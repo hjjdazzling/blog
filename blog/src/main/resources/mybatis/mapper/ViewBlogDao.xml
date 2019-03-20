@@ -19,4 +19,24 @@
     <update id="updateArticleViewCount">
         update article set view_count = view_count + 1 where id = #{id}
     </update>
+
+    <update id="updateArticlePraiseNumber">
+        update article set praise_number = praise_number + (#{count})
+        where id = #{id}
+    </update>
+
+    <update id="updateArticleNegativeNumber">
+        update article set negative_number = negative_number + (#{count})
+        where id = #{id}
+    </update>
+
+    <update id="updateUserInformationAttentionNumber">
+        update user_information set attention_number = attention_number + (#{count})
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateUserInformationFansNumber">
+        update user_information set fans_number = fans_number + (#{count})
+        where user_id = #{userId}
+    </update>
 </mapper>

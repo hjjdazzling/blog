@@ -44,8 +44,24 @@ public class ViewBlogService {
         return viewBlogDao.updateArticleViewCount(id);
     }
 
+    public Integer updateArticlePraiseNumber(int id,int count) {
+        return viewBlogDao.updateArticlePraiseNumber(id, count);
+    }
 
     public UserInformation2 getUserInformation2ByIdFromCache(Integer userId) {
         return viewBlogCache.getUserInformation2(userId);
+    }
+
+    public void updateUserInformation2Cache(UserInformation2 userInformation2) {
+        viewBlogCache.updateUserInformation2(userInformation2);
+    }
+
+    public Integer updateArticleNegaticePraiseNumber(int id,int count) {
+        return viewBlogDao.updateArticleNegativeNumber(id, count);
+    }
+
+    public void updateUserInformation(int userId,int userHaveId, int count) {
+        viewBlogDao.updateUserInformationAttentionNumber(userHaveId, count);
+        viewBlogDao.updateUserInformationFansNumber(userId, count);
     }
 }

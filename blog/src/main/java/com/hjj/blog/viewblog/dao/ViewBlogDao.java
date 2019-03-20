@@ -2,6 +2,7 @@ package com.hjj.blog.viewblog.dao;
 
 import com.hjj.blog.projo.Article;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,11 +22,11 @@ public interface ViewBlogDao {
 
     public Integer updateArticleViewCount(int id);
 
-    public Integer updateArticlePraiseNumber(int id);
+    public Integer updateArticlePraiseNumber(@Param("id") int id, @Param("count")int count);
 
-    public Integer updateArticleNegativeNumber(int id);
+    public Integer updateArticleNegativeNumber(@Param("id") int id, @Param("count")int count);
 
-    public Integer articleAttention(int id);
+    public Integer updateUserInformationAttentionNumber(@Param("userId")int userId, @Param("count")int count);
 
-    public Integer articleCollect(int id);
+    public Integer updateUserInformationFansNumber(@Param("userId")int userId, @Param("count")int count);
 }

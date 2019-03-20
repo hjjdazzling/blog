@@ -33,14 +33,14 @@ public class UserInformationService {
             userInformation2.setCollectAllId(new HashSet<Integer>());
             userInformation2.setAttentionAllId(new HashSet<Integer>());
             userInformation2.setNegativeAllId(new HashSet<Integer>());
+
             userInformationDao.addUserInformation2(userInformation2);
         }
 
 
-        System.out.println("cache" + userInformation2);
 
         if (userInformation2 != null) {
-            System.out.println("进入cache");
+
             userInformationCache.cacheUserInformation2(userInformation2);
         }
     }

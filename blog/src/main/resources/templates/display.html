@@ -29,21 +29,42 @@
     <div class="container">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h3 class="panel-title" th:utext="${title}"></h3>
+                <h3 class="panel-title" th:utext="${session.title}"></h3>
             </div>
             <div class="panel-body">
-                <div th:utext="${content}"></div>
+                <div th:utext="${session.content}"></div>
             </div>
         </div>
     </div>
 
-   <div th:if="${isSelf} == 'false'">
-        <a href="" th:if="${isPraise} == 'true'">
+   <div th:if="${session.isSelf} == 'false'">
+        <a th:href="@{/viewBlogController/noPraise(articleId=${session.articleId})}" th:if="${session.isPraise} == 'true'">
             <img src="/images/yesPraise.png">
         </a>
-        <a href="" th:if="${isPraise} == 'false'">
+        <a th:href="@{/viewBlogController/praise(articleId=${session.articleId})}" th:if="${session.isPraise} == 'false'">
             <img src="/images/noPraise.png">
         </a>
+
+       <a th:href="@{/viewBlogController/noNegativePraise(articleId=${session.articleId})}" th:if="${session.isNegativePraise} == 'true'">
+           <img src="/images/negativePraise.png">
+       </a>
+       <a th:href="@{/viewBlogController/negativePraise(articleId=${session.articleId})}" th:if="${session.isNegativePraise} == 'false'">
+           <img src="/images/noNegativePraise.png">
+       </a>
+
+       <a th:href="@{/viewBlogController/noCollect(articleId=${session.articleId})}" th:if="${session.isCollect} == 'true'">
+           <img src="/images/collect.png">
+       </a>
+       <a th:href="@{/viewBlogController/collect(articleId=${session.articleId})}" th:if="${session.isCollect} == 'false'">
+           <img src="/images/noCollect.png">
+       </a>
+
+       <a th:href="@{/viewBlogController/noAttention(articleId=${session.articleId})}" th:if="${session.isAttention} == 'true'">
+           <img src="/images/attention.png">
+       </a>
+       <a th:href="@{/viewBlogController/attention(articleId=${session.articleId})}" th:if="${session.isAttention} == 'false'">
+           <img src="/images/noAttention.png">
+       </a>
    </div>
 </body>
 </html>
