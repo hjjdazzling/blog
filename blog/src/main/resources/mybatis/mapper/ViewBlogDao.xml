@@ -39,4 +39,6 @@
         update user_information set fans_number = fans_number + (#{count})
         where user_id = #{userId}
     </update>
+
+
 </mapper>

@@ -1,8 +1,11 @@
 package com.hjj.blog.listener.service;
 
 import com.hjj.blog.listener.cache.UserInformationCache;
+import com.hjj.blog.listener.cache.ViewRecordCache;
 import com.hjj.blog.listener.dao.UserInformationDao;
+import com.hjj.blog.listener.dao.ViewRecordDao;
 import com.hjj.blog.projo.UserInformation2;
+import com.hjj.blog.projo.ViewRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +24,6 @@ public class UserInformationService {
     private UserInformationDao userInformationDao;
     @Autowired
     private UserInformationCache userInformationCache;
-
 
     public void cache(Integer userId) {
         UserInformation2 userInformation2 = userInformationDao.getUserInformation2ById(userId);

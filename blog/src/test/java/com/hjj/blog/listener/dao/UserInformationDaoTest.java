@@ -2,7 +2,7 @@ package com.hjj.blog.listener.dao;
 
 import com.hjj.blog.projo.UserInformation;
 import com.hjj.blog.projo.UserInformation2;
-import com.hjj.blog.userinformation2.UserInformation2Dao;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,7 @@
 package com.hjj.blog.viewblog.controller;
 
 import com.hjj.blog.edit.service.EditService;
+import com.hjj.blog.listener.service.ViewRecordService;
 import com.hjj.blog.projo.Article;
 import com.hjj.blog.projo.ArticleType;
 import com.hjj.blog.projo.User;
@@ -31,7 +32,9 @@ public class ViewBlogController {
     @Autowired
     private PegDownProcessor peg;
     @Autowired
-    public EditService editService;
+    private EditService editService;
+    @Autowired
+    private ViewRecordService viewRecordService;
 
     @RequestMapping("getArticle")
     public String getArticle(@RequestParam("pageNum") int pageNum,
@@ -100,6 +103,7 @@ public class ViewBlogController {
         }
         session.setAttribute("articleId", id);
 
+        viewRecordService.addViewRedord(user.getId(), id);
         return "display";
     }
 

@@ -1,6 +1,7 @@
 package com.hjj.blog.listener;
 
 import com.hjj.blog.listener.service.UserInformationService;
+import com.hjj.blog.listener.service.ViewRecordService;
 import com.hjj.blog.projo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,15 @@ public class LoginAndExitListener implements HttpSessionListener,
         HttpSessionAttributeListener{
 
     private UserInformationService userInformationService;
+    private ViewRecordService viewRecordService;
 
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
         //初始化userInformationService
         userInformationService = WebApplicationContextUtils.getWebApplicationContext(
                 httpSessionEvent.getSession().getServletContext()).getBean(UserInformationService.class);
+        viewRecordService = WebApplicationContextUtils.getWebApplicationContext(
+                httpSessionEvent.getSession().getServletContext()).getBean(ViewRecordService.class);
     }
 
     @Override
@@ -32,14 +36,19 @@ public class LoginAndExitListener implements HttpSessionListener,
         HttpSession session = httpSessionEvent.getSession();
         User user = (User) session.getAttribute("user");
         userInformationService.deleteCache(user.getId());
+        viewRecordService.flushCacheAndDeleteCache(user.getId());
     }
 
     @Override
     public void attributeAdded(HttpSessionBindingEvent httpSessionBindingEvent) {
-        HttpSession session = httpSessionBindingEvent.getSession();
-        User user = (User) session.getAttribute("user");
-        //查询user的个人信息放入redis，退出时从删除
-        userInformationService.cache(user.getId());
+        if(httpSessionBindingEvent.getName() == "user") {
+            System.out.println("---------------------------------------");
+            HttpSession session = httpSessionBindingEvent.getSession();
+            User user = (User) session.getAttribute("user");
+            //查询user的个人信息放入redis，退出时从删除
+            userInformationService.cache(user.getId());
+            viewRecordService.cache(user.getId());
+        }
     }
 
     @Override

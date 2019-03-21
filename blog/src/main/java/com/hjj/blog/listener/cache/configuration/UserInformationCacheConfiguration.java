@@ -2,6 +2,7 @@ package com.hjj.blog.listener.cache.configuration;
 
 import com.hjj.blog.projo.User;
 import com.hjj.blog.projo.UserInformation2;
+import com.hjj.blog.projo.ViewRecord;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -27,4 +28,6 @@ public class UserInformationCacheConfiguration {
         userInformationRedisTemplate.setDefaultSerializer(serializer);
         return userInformationRedisTemplate;
     }
+
+
 }

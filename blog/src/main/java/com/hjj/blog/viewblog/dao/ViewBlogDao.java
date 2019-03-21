@@ -1,6 +1,7 @@
 package com.hjj.blog.viewblog.dao;
 
 import com.hjj.blog.projo.Article;
+import com.hjj.blog.projo.ViewRecord;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,6 @@ public interface ViewBlogDao {
     public Integer updateUserInformationAttentionNumber(@Param("userId")int userId, @Param("count")int count);
 
     public Integer updateUserInformationFansNumber(@Param("userId")int userId, @Param("count")int count);
+
+
 }

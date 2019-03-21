@@ -5,12 +5,15 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hjj.blog.projo.Article;
 import com.hjj.blog.projo.UserInformation2;
+import com.hjj.blog.projo.ViewRecord;
 import com.hjj.blog.viewblog.cache.ViewBlogCache;
 import com.hjj.blog.viewblog.dao.ViewBlogDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -64,4 +67,12 @@ public class ViewBlogService {
         viewBlogDao.updateUserInformationAttentionNumber(userHaveId, count);
         viewBlogDao.updateUserInformationFansNumber(userId, count);
     }
+
+    public void addViewRecord(ViewRecord viewRecord) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String str = dateTimeFormatter.format(LocalDate.now());
+
+
+
+     }
 }

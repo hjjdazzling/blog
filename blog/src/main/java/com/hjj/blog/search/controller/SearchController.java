@@ -32,7 +32,6 @@ public class SearchController {
     public String  search(@RequestParam("pageNum") int pageNum,
                           @RequestParam("pageSize") int pageSize,
                           Search search, HttpServletRequest request, HttpSession session) {
-        System.out.println("0" + search);
 
         if (!(search.getTitle() == null || search.getTitle().trim().equals(""))
                 || !(search.getArticleType() == null || search.getArticleType().trim().equals(""))

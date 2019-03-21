@@ -1,6 +1,7 @@
 package com.hjj.blog.viewblog.cache;
 
 import com.hjj.blog.projo.UserInformation2;
+import com.hjj.blog.projo.ViewRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
@@ -26,4 +27,5 @@ public class ViewBlogCache {
     public UserInformation2 getUserInformation2(Integer id) {
         return (UserInformation2)redisTemplate.opsForHash().entries("user_information2").get(id);
     }
+
 }

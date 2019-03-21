@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjj.blog.listener.dao.ViewRecordDao">
+    <insert id="addViewRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into view_record(user_id, view_time, view_record)
+        values(#{userId}, #{viewTime}, #{viewRecord, jdbcType=VARCHAR,typeHandler=com.hjj.blog.typehandler.SetTypeHandler})
+    </insert>
+
+    <update id="updateViewRecord">
+        update view_record set view_record = #{viewRecord, jdbcType=VARCHAR,typeHandler=com.hjj.blog.typehandler.SetTypeHandler}
+        where id = #{id}
+    </update>
+
+    <select id="selectViewRecord" resultType="java.lang.Integer">
+        select id from view_record
+        where user_id =#{userId} and view_time >= #{start}
+    </select>
+
+    <select id="selectViewRecordByUserId" resultType="java.lang.Integer">
+        select id from view_record
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectViewRecordsByUserId" resultType="com.hjj.blog.projo.ViewRecord">
+        select * from view_record where user_id = #{userId}
+    </select>
+</mapper>
