@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -18,5 +18,16 @@
         用户:<input type="text" name="username"><br/>
         <input type="submit" value="搜索"><br/>
     </form>
+
+    <div th:each="article:${recommandArticles}">
+        <a th:href="@{/viewBlogController/getArticleContent(id=${article.id})}">
+            [[${article.title}]]
+        </a> &nbsp;&nbsp;
+        <h5>
+            点赞数:[[${article.praiseNumber}]] &nbsp;
+            差赞数:[[${article.negativeNumber}]] &nbsp;
+            更新时间: [[${article.updateTime}]]&nbsp;
+        </h5>
+    </div>
 </body>
 </html>

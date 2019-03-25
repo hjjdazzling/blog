@@ -1,7 +1,9 @@
 package com.hjj.blog.login.controller;
 
 import com.hjj.blog.login.service.LoginService;
+import com.hjj.blog.projo.Article;
 import com.hjj.blog.projo.User;
+import com.hjj.blog.recommend.service.RecommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -25,7 +28,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequestMapping("/LoginController")
 public class LoginController {
     @Autowired
-    public LoginService loginService;
+    private LoginService loginService;
+    @Autowired
+    private RecommandService recommandService;
+    @Autowired
+    private Set<Article> articleSet;
 
     /**
      * 单点登陆
@@ -82,7 +89,18 @@ public class LoginController {
                 }
             }
 
-            session.setMaxInactiveInterval(10);
+            session.setMaxInactiveInterval(60);
+
+            List<Article> recommandArticlesByProfessionalType =
+                    recommandService.getRecommandArticleByProfessionalType(user.getId(), 1,5);
+
+            List<Article> recommandArticlesByAttentionAllId =
+                    recommandService.getRecommandArticleByAttentionAllId(user.getId(), 1, 5);
+
+            articleSet.addAll(recommandArticlesByProfessionalType);
+            articleSet.addAll(recommandArticlesByAttentionAllId);
+
+            request.setAttribute("recommandArticles", articleSet);
 
             return "select";
         }

@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author haojunjie
@@ -40,6 +41,29 @@ public class Article  {
                 ", date=" + updateTime +
                 ", content='" + content + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Article article = (Article) o;
+        return priacy == article.priacy &&
+                Objects.equals(id, article.id) &&
+                Objects.equals(userId, article.userId) &&
+                Objects.equals(articleTypeId, article.articleTypeId) &&
+                Objects.equals(title, article.title) &&
+                Objects.equals(praiseNumber, article.praiseNumber) &&
+                Objects.equals(negativeNumber, article.negativeNumber) &&
+                Objects.equals(viewCount, article.viewCount) &&
+                Objects.equals(updateTime, article.updateTime) &&
+                Objects.equals(content, article.content);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, userId, articleTypeId, title, praiseNumber, negativeNumber, viewCount, priacy, updateTime, content);
     }
 
     public Integer getId() {

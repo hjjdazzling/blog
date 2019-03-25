@@ -3,10 +3,10 @@ spring:
   datasource:
     username: root
     password: haojunjie
-    url: jdbc:mysql://10.128.0.6:9999/blog
+    url: jdbc:mysql://10.128.0.1:9999/blog
     driver-class-name: com.mysql.jdbc.Driver
   redis:
-    host: 10.128.0.6
+    host: 10.128.0.1
     port: 8890
   thymeleaf:
     cache: false

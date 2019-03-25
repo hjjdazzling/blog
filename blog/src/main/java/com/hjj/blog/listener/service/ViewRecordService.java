@@ -60,10 +60,8 @@ public class ViewRecordService {
     public void addViewRedord(int userId,int articleId) {
         //只更新最新的那次的信息
         int maxId = viewRecordCache.getMaxCacheUserViewRecordId(userId);
-        System.out.println(maxId);
-
         ViewRecord viewRecord = viewRecordCache.getViewRecordById(maxId);
-        System.out.println(viewRecord);
+
         if (viewRecord == null) {
             set.add(articleId);
             viewRecord.setViewRecord(set);
