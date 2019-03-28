@@ -66,5 +66,36 @@
            <img src="/images/noAttention.png">
        </a>
    </div>
+    <!-- 评论 -->
+    <div>
+        <form action="/CriteriaController/criteria">
+            <input type="text" name ="content"><br/>
+            <input type="hidden" name="articleId" th:value="${session.articleId}">
+            <input type="hidden" name="userId" th:value="${session.user.id}">
+            <input type="hidden" name="toUserId" th:value="${session.articleAuthorId}">
+            <input type="hidden" name="isReply" value="false">
+            <input type="submit" value="发表">
+        </form>
+    </div>
+
+    <!--展示历史评论-->
+    <div th:if="${session.criterias} != null">
+        <div th:each="criteria : ${session.criterias}">
+            <h5 th:each="message: ${criteria.criteriaArticle}">
+                 [[${message.formTime()}]]&nbsp;&nbsp;
+                 [[${message.content}]]
+                 <form action="/CriteriaController/criteria">
+                    <input type="button" value="回复"/>
+                    <input type="text" name ="content"><br/>
+                    <input type="hidden" name="criteriaId" th:value="${criteria.id}">
+                    <input type="hidden" name="articleId" th:value="${session.articleId}">
+                    <input type="hidden" name="userId" th:value="${session.user.id}">
+                    <input type="hidden" name="content2" th:value="${message.content}">
+                    <input type="hidden" name="isReply" value="true">
+                    <input type="submit" value="发表">
+                 </form>
+            </h5>
+        </div>
+    </div>
 </body>
 </html>

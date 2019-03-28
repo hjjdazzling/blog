@@ -14,11 +14,13 @@
           select id from professional_type3 where professional_type2_id = (
           select professional_type2_id from professional_type3 where id = (
           select professional_type3_id from user_information where user_id = 1))))
-          and id not in
-        <foreach collection="viewRecords" separator="," open="(" close=")" item="viewRecord">
-            #{viewRecord}
-        </foreach>
-        order by praise_number DESC, view_count DESC
+          <if test="viewRecords != null and viewRecords.size > 0">
+            and id not in
+            <foreach collection="viewRecords" separator="," open="(" close=")" item="viewRecord">
+              #{viewRecord}
+            </foreach>
+          </if>
+          order by praise_number DESC, view_count DESC
     </select>
 
     <select id="getUserInformation2ByUserId" resultType="com.hjj.blog.projo.UserInformation2">

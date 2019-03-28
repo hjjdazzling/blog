@@ -3,6 +3,7 @@ package com.hjj.blog.typehandler;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPObject;
+import com.hjj.blog.projo.Message;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;

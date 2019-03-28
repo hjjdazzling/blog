@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjj.blog.criteria.dao.CriteriaDao">
+    <insert id="insertCriteria">
+        insert into criteria(article_id, user_id, criteria_time, criteria_article)
+        values(#{articleId}, #{userId}, #{criteriaTime},
+        #{criteriaArticle, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.ListMessageTypeHandler})
+    </insert>
+
+    <select id="selectCriteriaByArticleId" resultType="com.hjj.blog.projo.Criteria">
+        select id,criteria_article from criteria where article_id = #{id}
+    </select>
+
+    <select id="selectCriteriaIsExisted" resultType="java.lang.Integer">
+        select id from criteria where article_id = #{articleId} and user_id = #{userId}
+    </select>
+
+    <select id="selectById" resultType="com.hjj.blog.projo.Criteria">
+        select id, criteria_article from criteria where id = #{id}
+    </select>
+
+    <update id="updateCriteria">
+        update criteria set criteria_article=#{criteriaArticle, jdbcType=VARCHAR, typeHandler=com.hjj.blog.typehandler.ListMessageTypeHandler}
+        where id = #{id}
+    </update>
+
+    <insert id="insertCriteriaMessage">
+        insert into criteria_message(user_id, from_user_id, is_read, time, content)
+        values(#{userId}, #{fromUserId}, #{isRead}, #{time}, #{content})
+    </insert>
+
+    <update id="updateCriteriaMessage">
+        update criteria_message set is_read = true
+        where id = #{id}
+    </update>
+
+    <select id="getByUserId" resultType="com.hjj.blog.projo.CriteriaMessage">
+        select id, from_user_id, time, content from criteria_message where user_id = #{userId}
+    </select>
+
+    <select id="getUserNameById" resultType="java.lang.String">
+        select username from user where id = #{id}
+    </select>
+
+    <select id="isAuthor" resultType="java.lang.Integer">
+        select id from article where user_id = #{userId} and id = #{articleId}
+    </select>
+
+    <select id="getIdByUserName" resultType="java.lang.Integer">
+        select id from user where username = #{username}
+    </select>
+
+    <select id="selectAuthorByArticleId" resultType="com.hjj.blog.projo.User">
+        select id,username from user where id = (
+          select user_id from article where id = #{id}
+        )
+    </select>
+</mapper>

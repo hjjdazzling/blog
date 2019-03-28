@@ -1,21 +1,12 @@
 package com.hjj.blog.viewblog.dao;
 
-import com.hjj.blog.projo.ViewRecord;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 
 /**
  * @author haojunjie
@@ -59,4 +50,11 @@ public class ViewBlogDaoTest {
 
         viewBlogDao.updateArticlePraiseNumber(id, count);
     }
+
+    @Test
+    public void getArticleCriteriaByIdTest() {
+        System.out.println(viewBlogDao.getArticleCriteriaById(8));
+    }
+
+
 }

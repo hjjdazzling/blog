@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hjj.blog.projo.Article;
+import com.hjj.blog.projo.Criteria;
 import com.hjj.blog.projo.UserInformation2;
 import com.hjj.blog.projo.ViewRecord;
 import com.hjj.blog.viewblog.cache.ViewBlogCache;
@@ -68,11 +69,8 @@ public class ViewBlogService {
         viewBlogDao.updateUserInformationFansNumber(userId, count);
     }
 
-    public void addViewRecord(ViewRecord viewRecord) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String str = dateTimeFormatter.format(LocalDate.now());
+    public List<Criteria> getArticleCriteriaById(int id) {
+        return viewBlogDao.getArticleCriteriaById(id);
+    }
 
-
-
-     }
 }

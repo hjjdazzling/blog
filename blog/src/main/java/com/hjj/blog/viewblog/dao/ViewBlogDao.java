@@ -1,7 +1,7 @@
 package com.hjj.blog.viewblog.dao;
 
 import com.hjj.blog.projo.Article;
-import com.hjj.blog.projo.ViewRecord;
+import com.hjj.blog.projo.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -31,5 +31,7 @@ public interface ViewBlogDao {
 
     public Integer updateUserInformationFansNumber(@Param("userId")int userId, @Param("count")int count);
 
+    //查看历史评论
+    public List<Criteria> getArticleCriteriaById(int id);
 
 }

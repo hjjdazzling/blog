@@ -2,10 +2,7 @@ package com.hjj.blog.viewblog.controller;
 
 import com.hjj.blog.edit.service.EditService;
 import com.hjj.blog.listener.service.ViewRecordService;
-import com.hjj.blog.projo.Article;
-import com.hjj.blog.projo.ArticleType;
-import com.hjj.blog.projo.User;
-import com.hjj.blog.projo.UserInformation2;
+import com.hjj.blog.projo.*;
 import com.hjj.blog.viewblog.service.ViewBlogService;
 import org.hibernate.validator.constraints.Email;
 import org.pegdown.PegDownProcessor;
@@ -54,6 +51,7 @@ public class ViewBlogController {
         User user = (User)session.getAttribute("user");
         //查询文章的拥有者user_id
         int userId = viewBlogService.getArticleUserId(id);
+        session.setAttribute("articleAuthorId", userId);
 
         if (user.getId() != userId) {
             //浏览数+1
@@ -104,6 +102,10 @@ public class ViewBlogController {
         session.setAttribute("articleId", id);
 
         viewRecordService.addViewRedord(user.getId(), id);
+
+        //添加评论信息
+        List<Criteria> list = viewBlogService.getArticleCriteriaById(id);
+        session.setAttribute("criterias", list);
         return "display";
     }
 

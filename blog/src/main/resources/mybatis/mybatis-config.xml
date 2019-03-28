@@ -10,5 +10,7 @@
     <typeHandlers>
         <typeHandler handler="com.hjj.blog.typehandler.SetTypeHandler"
                      javaType="java.util.Set" jdbcType="VARCHAR"></typeHandler>
+        <typeHandler handler="com.hjj.blog.typehandler.ListMessageTypeHandler"
+                    javaType="java.util.List" jdbcType="VARCHAR"></typeHandler>
     </typeHandlers>
 </configuration>

@@ -40,5 +40,10 @@
         where user_id = #{userId}
     </update>
 
+    <select id="getArticleCriteriaById" resultType="com.hjj.blog.projo.Criteria">
+        select id, article_id, user_id, criteria_article from criteria
+        where article_id = #{id}
+    </select>
+
 
 </mapper>
