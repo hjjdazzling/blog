@@ -16,6 +16,7 @@ public class Message {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(time);
     }
+
     public Message() {
     }
 
@@ -26,6 +27,7 @@ public class Message {
                 ", content='" + content + '\'' +
                 '}';
     }
+
 
     public Date getTime() {
         return time;

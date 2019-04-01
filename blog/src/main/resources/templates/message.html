@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>时间</td>
+        <td>内容</td>
+    </tr>
+    <div th:each="criteriaMessage : ${session.criteriaMessages}">
+        <tr>
+            <td>[[${criteriaMessage.formTime()}]]</td>
+            <td th:if="${criteriaMessage.isRead} == false">
+                未读
+            </td>
+            <td th:if="${criteriaMessage.isRead} == true">
+                已读
+            </td>
+            <td th:utext="${criteriaMessage.content}"></td>
+            <td>
+                <form action="/MessageController/updateMessageState">
+                    <input type="hidden" name="id" th:value="${criteriaMessage.id}">
+                    <input type="submit" value="更新消息状态">
+                </form>
+            </td>
+        </tr>
+    </div>
+</table>
+</body>
+</html>

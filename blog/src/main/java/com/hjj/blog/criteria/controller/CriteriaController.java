@@ -68,6 +68,7 @@ public class CriteriaController {
         if (criteriaId == null) {
             criteriaId = -1;
         }
+
         criteriaService.criteria(criteria, criteriaMessage, user, toUserId, isReply, criteriaId);
 
         //添加评论信息

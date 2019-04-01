@@ -1,6 +1,8 @@
 package com.hjj.blog.projo;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -15,6 +17,10 @@ public class CriteriaMessage {
     private Date time;
     private String content;
 
+    public String formTime() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return df.format(time);
+    }
     public CriteriaMessage() {
     }
 
@@ -54,7 +60,7 @@ public class CriteriaMessage {
         this.fromUserId = fromUserId;
     }
 
-    public boolean isRead() {
+    public boolean getIsRead() {
         return isRead;
     }
 

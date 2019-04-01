@@ -2,6 +2,7 @@ package com.hjj.blog.viewblog.controller;
 
 import com.hjj.blog.edit.service.EditService;
 import com.hjj.blog.listener.service.ViewRecordService;
+import com.hjj.blog.message.service.MessageService;
 import com.hjj.blog.projo.*;
 import com.hjj.blog.viewblog.service.ViewBlogService;
 import org.hibernate.validator.constraints.Email;
@@ -32,6 +33,8 @@ public class ViewBlogController {
     private EditService editService;
     @Autowired
     private ViewRecordService viewRecordService;
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping("getArticle")
     public String getArticle(@RequestParam("pageNum") int pageNum,
@@ -106,6 +109,10 @@ public class ViewBlogController {
         //添加评论信息
         List<Criteria> list = viewBlogService.getArticleCriteriaById(id);
         session.setAttribute("criterias", list);
+
+
+        //评论已查看,更新我的信息里面的信息状态为已查看
+        messageService.updateCriteriaMessagesById(id);
         return "display";
     }
 
