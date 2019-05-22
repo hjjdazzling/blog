@@ -7,20 +7,20 @@
     <select id="getViewRecordByUserId" resultType="com.hjj.blog.projo.ViewRecord">
         select view_record from view_record where user_id = #{userId}
     </select>
-    <!-- 根据用户的 -->
+    <!-- 根据用户的专业类型推荐 -->
     <select id="getArticleByProfessionalType" resultType="com.hjj.blog.projo.Article">
         select * from article where user_id in (
-          select user_id from user_information where professional_type3_id in (
-          select id from professional_type3 where professional_type2_id = (
-          select professional_type2_id from professional_type3 where id = (
-          select professional_type3_id from user_information where user_id = 1))))
-          <if test="viewRecords != null and viewRecords.size > 0">
+        select user_id from user_information where professional_type3_id in (
+        select id from professional_type3 where professional_type2_id = (
+        select professional_type2_id from professional_type3 where id = (
+        select professional_type3_id from user_information where user_id = 1))))
+        <if test="viewRecords != null and viewRecords.size > 0">
             and id not in
             <foreach collection="viewRecords" separator="," open="(" close=")" item="viewRecord">
-              #{viewRecord}
+                #{viewRecord}
             </foreach>
-          </if>
-          order by praise_number DESC, view_count DESC
+        </if>
+        order by praise_number DESC, view_count DESC
     </select>
 
     <select id="getUserInformation2ByUserId" resultType="com.hjj.blog.projo.UserInformation2">
@@ -30,19 +30,19 @@
     <select id="getArticleByAttentionIds" resultType="com.hjj.blog.projo.Article">
         select * from article
         <where>
-        <if test="attentionAllId != null and attentionAllId.size > 0">
-            user_id in
-          <foreach collection="attentionAllId" separator="," open="(" close=")" item="userId">
-              #{userId}
-          </foreach>
-            and
-        </if>
-        <if test="viewRecords != null and viewRecords.size > 0">
-          id not in
-          <foreach collection="viewRecords" separator="," open="(" close=")" item="viewRecord">
-              #{viewRecord}
-          </foreach>
-        </if>
+            <if test="attentionAllId != null and attentionAllId.size > 0">
+                user_id in
+                <foreach collection="attentionAllId" separator="," open="(" close=")" item="userId">
+                    #{userId}
+                </foreach>
+                and
+            </if>
+            <if test="viewRecords != null and viewRecords.size > 0">
+                id not in
+                <foreach collection="viewRecords" separator="," open="(" close=")" item="viewRecord">
+                    #{viewRecord}
+                </foreach>
+            </if>
         </where>
         order by praise_number DESC, view_count DESC
     </select>

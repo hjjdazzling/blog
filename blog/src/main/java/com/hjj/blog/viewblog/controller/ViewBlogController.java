@@ -48,6 +48,7 @@ public class ViewBlogController {
 
     @RequestMapping("/getArticleContent")
     public String getArticleContent(@RequestParam("id") Integer id,
+                                    @RequestParam(value = "title", required = false) String title,
                                     HttpServletRequest request,HttpSession session) {
         String content = viewBlogService.getArticleContent(id);
         //获取当前用户的信息,如果当前用户就是文章的拥有者则浏览数不变,否则+1
@@ -63,7 +64,8 @@ public class ViewBlogController {
 
         //将markDown语法转变成html语法
         String html =peg.markdownToHtml(content);
-        session.setAttribute("content", html);
+        request.setAttribute("content", html);
+        request.setAttribute("title", title);
         UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
 
         if (userInformation2.getPraiseAllId() != null && userInformation2.getPraiseAllId().contains(id)) {
@@ -129,6 +131,7 @@ public class ViewBlogController {
         String content = viewBlogService.getArticleContent(id);
         request.setAttribute("content", content);
         request.setAttribute("title", title);
+
         return "write";
     }
 
@@ -140,7 +143,10 @@ public class ViewBlogController {
      */
 
     @RequestMapping("/praise")
-    public String praise(@RequestParam("articleId") Integer articleId,HttpSession session) {
+    public String praise(@RequestParam("articleId") Integer articleId,
+                         @RequestParam("title") String title,
+                         @RequestParam("articleContent") String content,
+                         HttpSession session, HttpServletRequest request) {
         session.setAttribute("isPraise", "true");
         User user = (User)session.getAttribute("user");
         UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
@@ -149,6 +155,8 @@ public class ViewBlogController {
         viewBlogService.updateUserInformation2Cache(userInformation2);
         //让文章点赞数+1
         viewBlogService.updateArticlePraiseNumber(articleId, 1);
+        request.setAttribute("title", title);
+        request.setAttribute("content", content);
 
         return "display";
     }
@@ -160,7 +168,10 @@ public class ViewBlogController {
      * @return
      */
     @RequestMapping("/noPraise")
-    public String noPraise(@RequestParam("articleId") Integer articleId,HttpSession session) {
+    public String noPraise(@RequestParam("articleId") Integer articleId,
+                           @RequestParam("title") String title,
+                           @RequestParam("articleContent") String content,
+                           HttpSession session, HttpServletRequest request) {
         session.setAttribute("isPraise", "false");
         User user = (User)session.getAttribute("user");
         UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
@@ -169,7 +180,8 @@ public class ViewBlogController {
         viewBlogService.updateUserInformation2Cache(userInformation2);
         //让文章点赞数+1
         viewBlogService.updateArticlePraiseNumber(articleId, -1);
-
+        request.setAttribute("title", title);
+        request.setAttribute("content", content);
         return "display";
     }
 
@@ -180,7 +192,10 @@ public class ViewBlogController {
      * @return
      */
     @RequestMapping("/negativePraise")
-    public String negativePraise(@RequestParam("articleId") Integer articleId,HttpSession session) {
+    public String negativePraise(@RequestParam("articleId") Integer articleId,
+                                 @RequestParam("title") String title,
+                                 @RequestParam("articleContent") String content,
+                                 HttpSession session, HttpServletRequest request) {
         session.setAttribute("isNegativePraise", "true");
         User user = (User)session.getAttribute("user");
         UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
@@ -189,7 +204,8 @@ public class ViewBlogController {
         viewBlogService.updateUserInformation2Cache(userInformation2);
         //让文章点赞数+1
         viewBlogService.updateArticleNegaticePraiseNumber(articleId, 1);
-
+        request.setAttribute("title", title);
+        request.setAttribute("content", content);
         return "display";
     }
 
@@ -200,7 +216,10 @@ public class ViewBlogController {
      * @return
      */
     @RequestMapping("/noNegativePraise")
-    public String noNegativePraise(@RequestParam("articleId") Integer articleId,HttpSession session) {
+    public String noNegativePraise(@RequestParam("articleId") Integer articleId,
+                                   @RequestParam("title") String title,
+                                   @RequestParam("articleContent") String content,
+                                   HttpSession session, HttpServletRequest request) {
         session.setAttribute("isNegativePraise", "false");
         User user = (User)session.getAttribute("user");
         UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
@@ -209,7 +228,8 @@ public class ViewBlogController {
         viewBlogService.updateUserInformation2Cache(userInformation2);
         //让文章点赞数+1
         viewBlogService.updateArticleNegaticePraiseNumber(articleId, -1);
-
+        request.setAttribute("title", title);
+        request.setAttribute("content", content);
         return "display";
     }
 
@@ -220,14 +240,18 @@ public class ViewBlogController {
      * @return
      */
     @RequestMapping("/collect")
-    public String collect(@RequestParam("articleId") Integer articleId,HttpSession session) {
+    public String collect(@RequestParam("articleId") Integer articleId,
+                          @RequestParam("title") String title,
+                          @RequestParam("articleContent") String content,
+                          HttpSession session, HttpServletRequest request) {
         session.setAttribute("isCollect", "true");
         User user = (User)session.getAttribute("user");
         UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
         Set<Integer> collectAllId = userInformation2.getCollectAllId();
         collectAllId.add(articleId);
         viewBlogService.updateUserInformation2Cache(userInformation2);
-
+        request.setAttribute("title", title);
+        request.setAttribute("content", content);
         return "display";
     }
 
@@ -238,19 +262,26 @@ public class ViewBlogController {
      * @return
      */
     @RequestMapping("/noCollect")
-    public String noCollect(@RequestParam("articleId") Integer articleId,HttpSession session) {
+    public String noCollect(@RequestParam("articleId") Integer articleId,
+                            @RequestParam("title") String title,
+                            @RequestParam("articleContent") String content,
+                            HttpSession session, HttpServletRequest request) {
         session.setAttribute("isCollect", "false");
         User user = (User)session.getAttribute("user");
         UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
         Set<Integer> collectAllId = userInformation2.getCollectAllId();
         collectAllId.remove(articleId);
         viewBlogService.updateUserInformation2Cache(userInformation2);
-
+        request.setAttribute("title", title);
+        request.setAttribute("content", content);
         return "display";
     }
 
     @RequestMapping("/attention")
-    public String attention(@RequestParam("articleId") Integer articleId,HttpSession session) {
+    public String attention(@RequestParam("articleId") Integer articleId,
+                            @RequestParam("title") String title,
+                            @RequestParam("articleContent") String content,
+                            HttpSession session, HttpServletRequest request) {
         session.setAttribute("isAttention", "true");
         User user = (User)session.getAttribute("user");
         UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
@@ -262,12 +293,16 @@ public class ViewBlogController {
         attentionAllId.add(userId);
         viewBlogService.updateUserInformation2Cache(userInformation2);
         viewBlogService.updateUserInformation(user.getId(), userId, 1);
-
+        request.setAttribute("title", title);
+        request.setAttribute("content", content);
         return "display";
     }
 
     @RequestMapping("/noAttention")
-    public String noAttention(@RequestParam("articleId") Integer articleId,HttpSession session) {
+    public String noAttention(@RequestParam("articleId") Integer articleId,
+                              @RequestParam("title") String title,
+                              @RequestParam("articleContent") String content,
+                              HttpSession session, HttpServletRequest request) {
         session.setAttribute("isAttention", "false");
         User user = (User)session.getAttribute("user");
         UserInformation2 userInformation2 = viewBlogService.getUserInformation2ByIdFromCache(user.getId());
@@ -278,7 +313,8 @@ public class ViewBlogController {
         attentionAllId.remove(userId);
         viewBlogService.updateUserInformation2Cache(userInformation2);
         viewBlogService.updateUserInformation(user.getId(), userId, -1);
-
+        request.setAttribute("title", title);
+        request.setAttribute("content", content);
         return "display";
     }
 

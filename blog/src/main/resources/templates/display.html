@@ -1,101 +1,171 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>展示博客</title>
-    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
-    <link th:href="@{/bootstrap/css/bootstrap-theme.css}" rel="stylesheet"/>
-    <script type="text/javascript">
-        function changePraisePicture(num) {
-            alert(num);
-            if (num==1 ){
-                document.getElementsByTagName("img")[0].style.display="none";
-                document.getElementsByTagName("img")[1].style.display="block";
-
-            } else {
-                document.getElementsByTagName("img")[0].style.display="block";
-                document.getElementsByTagName("img")[1].style.display="none";
-            }
-        }
-    </script>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/bootstrap/css/bootstrap-theme.css}" rel="stylesheet" />
     <script th:href="@{/jquery-3.2.1.min.js}" type="text/javascript"></script>
     <script th:href="@{/bootstrap/js/bootstrap.js}"></script>
+
 </head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    #header_box {
+        width: 100%;
+        height: 40px;
+        background-color: #333333;
+        line-height: 40px;
+
+    }
+
+    .nav-box {
+        width: 80%;
+        height: 40px;
+        margin: 0 auto;
+    }
+
+    .nav-box a {
+        color: #B0B0B0;
+        margin-right: 15px;
+        display: inline-block;
+        height: 40px;
+        border-radius: 5px;
+        transition-duration: 1s;
+        text-decoration:none;
+    }
+
+    .nav-box a:hover {
+        color: #fff;
+        background-color: paleturquoise;
+    }
+    .form-box {
+        width: 80%;
+        height: 1000px;
+        margin: 0 auto;
+    }
+	#huifu{
+		margin-right:20px;
+		}
+	#fabiao{
+		display:none;
+		}
+	#shuru{
+		display:none;
+		}
+    #form-innt{
+        display:flex;
+    }
+</style>
 <body>
-
-    <div class="container">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title" th:utext="${session.title}"></h3>
-            </div>
-            <div class="panel-body">
-                <div th:utext="${session.content}"></div>
+    <div class="blogs-box">
+        <header id="header_box">
+            <nav class="nav-box">
+                <a href="/select.html">返回主页</a>
+                <a href="/editController/write">写博客</a>
+                <a href="/ArticleTypeController/articleType.html">分类管理</a>
+                <a href="/viewBlogController/getArticle?pageNum=1&pageSize=5">我的博客</a>
+                <a href="/MessageController/getMessageList">我的消息</a>
+                <a href="/ExitController/exit">退出登录</a>
+            </nav>
+        </header>
+        <div class="form-box">
+            <div class="container">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <!-- 标题  -->
+                    <h1 th:utext="${title}"></h1>
+                </div>
+                <div class="panel-body">
+                    <!-- 文章内容 -->
+                    <div th:utext="${content}"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-   <div th:if="${session.isSelf} == 'false'">
-        <a th:href="@{/viewBlogController/noPraise(articleId=${session.articleId})}" th:if="${session.isPraise} == 'true'">
-            <img src="/images/yesPraise.png">
-        </a>
-        <a th:href="@{/viewBlogController/praise(articleId=${session.articleId})}" th:if="${session.isPraise} == 'false'">
-            <img src="/images/noPraise.png">
-        </a>
+        <div th:if="${session.isSelf} == 'false'">
+            <a th:href="@{/viewBlogController/noPraise(articleId=${session.articleId},
+             title = ${title}, articleContent = ${content})}" th:if="${session.isPraise} == 'true'">
+                <img src="/images/yesPraise.png">
+            </a>
+            <a th:href="@{/viewBlogController/praise(articleId=${session.articleId},
+             title = ${title}, articleContent = ${content})}" th:if="${session.isPraise} == 'false'">
+                <img src="/images/noPraise.png">
+            </a>
 
-       <a th:href="@{/viewBlogController/noNegativePraise(articleId=${session.articleId})}" th:if="${session.isNegativePraise} == 'true'">
-           <img src="/images/negativePraise.png">
-       </a>
-       <a th:href="@{/viewBlogController/negativePraise(articleId=${session.articleId})}" th:if="${session.isNegativePraise} == 'false'">
-           <img src="/images/noNegativePraise.png">
-       </a>
+            <a th:href="@{/viewBlogController/noNegativePraise(articleId=${session.articleId},
+             title = ${title}, articleContent = ${content})}" th:if="${session.isNegativePraise} == 'true'">
+                <img src="/images/negativePraise.png">
+            </a>
+            <a th:href="@{/viewBlogController/negativePraise(articleId=${session.articleId},
+             title = ${title}, articleContent = ${content})}" th:if="${session.isNegativePraise} == 'false'">
+                <img src="/images/noNegativePraise.png">
+            </a>
 
-       <a th:href="@{/viewBlogController/noCollect(articleId=${session.articleId})}" th:if="${session.isCollect} == 'true'">
-           <img src="/images/collect.png">
-       </a>
-       <a th:href="@{/viewBlogController/collect(articleId=${session.articleId})}" th:if="${session.isCollect} == 'false'">
-           <img src="/images/noCollect.png">
-       </a>
+            <a th:href="@{/viewBlogController/noCollect(articleId=${session.articleId},
+             title = ${title}, articleContent = ${content})}" th:if="${session.isCollect} == 'true'">
+                <img src="/images/collect.png">
+            </a>
+            <a th:href="@{/viewBlogController/collect(articleId=${session.articleId},
+             title = ${title}, articleContent = ${content})}" th:if="${session.isCollect} == 'false'">
+                <img src="/images/noCollect.png">
+            </a>
 
-       <a th:href="@{/viewBlogController/noAttention(articleId=${session.articleId})}" th:if="${session.isAttention} == 'true'">
-           <img src="/images/attention.png">
-       </a>
-       <a th:href="@{/viewBlogController/attention(articleId=${session.articleId})}" th:if="${session.isAttention} == 'false'">
-           <img src="/images/noAttention.png">
-       </a>
-   </div>
-    <!-- 评论 -->
-    <div>
-        <form action="/CriteriaController/criteria">
-            <input type="text" name ="content"><br/>
-            <input type="hidden" name="articleId" th:value="${session.articleId}">
-            <input type="hidden" name="userId" th:value="${session.user.id}">
-            <input type="hidden" name="toUserId" th:value="${session.articleAuthorId}">
-            <input type="hidden" name="isReply" value="false">
-            <input type="submit" value="发表">
-        </form>
-    </div>
-
-    <!--展示历史评论-->
-    <div th:if="${session.criterias} != null">
-        <div th:each="criteria : ${session.criterias}">
-            <h5 th:each="message: ${criteria.criteriaArticle}">
-                 [[${message.formTime()}]]&nbsp;&nbsp;
-                 [[${message.content}]]
-                 <form action="/CriteriaController/criteria">
-                    <input type="button" value="回复"/>
-                    <input type="text" name ="content"><br/>
-                    <input type="hidden" name="criteriaId" th:value="${criteria.id}">
-                    <input type="hidden" name="articleId" th:value="${session.articleId}">
-                    <input type="hidden" name="userId" th:value="${session.user.id}">
-                    <input type="hidden" name="content2" th:value="${message.content}">
-                    <input type="hidden" name="isReply" value="true">
-                    <input type="submit" value="发表">
-                 </form>
-            </h5>
+            <a th:href="@{/viewBlogController/noAttention(articleId=${session.articleId},
+             title = ${title}, articleContent = ${content})}" th:if="${session.isAttention} == 'true'">
+                <img src="/images/attention.png">
+            </a>
+            <a th:href="@{/viewBlogController/attention(articleId=${session.articleId},
+             title = ${title}, articleContent = ${content})}" th:if="${session.isAttention} == 'false'">
+                <img src="/images/noAttention.png">
+            </a>
         </div>
+        <!-- 评论 -->
+        <div>
+            <form action="/CriteriaController/criteria">
+                <input type="text" name="content"><br />
+                <input type="hidden" name="articleId" th:value="${session.articleId}">
+                <input type="hidden" name="userId" th:value="${session.user.id}">
+                <input type="hidden" name="toUserId" th:value="${session.articleAuthorId}">
+                <input type="hidden" name="isReply" value="false">
+                <input type="hidden" name="articleContent" th:value="${content}">
+                <input type="hidden" name="title" th:value="${title}">
+                <input type="submit" value="发表评论">
+            </form>
+        </div>
+
+        <!--展示历史评论-->
+        <div th:if="${session.criterias} != null">
+            <div th:each="criteria : ${session.criterias}">
+                <h5 th:each="message: ${criteria.criteriaArticle}">
+                    [[${message.formTime()}]]&nbsp;&nbsp;
+                    [[${message.content}]]
+
+                    <form id="form-innt" action="/CriteriaController/criteria">
+                        <input type="text" name="content" >
+                        <input type="submit" value="回复" >
+                        <input type="hidden" name="criteriaId" th:value="${criteria.id}">
+                        <input type="hidden" name="articleId" th:value="${session.articleId}">
+                        <input type="hidden" name="userId" th:value="${session.user.id}">
+                        <input type="hidden" name="content2" th:value="${message.content}">
+                        <input type="hidden" name="isReply" value="true">
+                        <input type="hidden" name="articleContent" th:value="${content}">
+                        <input type="hidden" name="title" th:value="${title}">
+                    </form>
+                </h5>
+            </div>
+        </div>
+        </div>
+
+        
     </div>
 </body>
+
 </html>

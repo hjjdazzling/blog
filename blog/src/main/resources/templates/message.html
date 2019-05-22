@@ -1,33 +1,120 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>我的信息</title>
 </head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    .blogs-box {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: url('./message.jpg') -117px;
+        background-size: cover;
+        overflow: auto;
+    }
+
+    .header-box {
+        width: 100%;
+        height: 40px;
+        background-color: #333333;
+        line-height: 40px;
+
+    }
+
+    .nav-box {
+        width: 80%;
+        height: 40px;
+        margin: 0 auto;
+    }
+
+    .nav-box a {
+        color: #fff;
+        margin-right: 15px;
+        display: inline-block;
+        height: 40px;
+        transition-duration: 1s;
+    }
+
+    .nav-box a:hover {
+        color: black;
+        background-color: palevioletred;
+    }
+
+    .table-box {
+        width: 80%;
+        height: auto;
+        margin: 0 auto;
+        line-height: 40px;
+    }
+
+    .table-box tr th {
+        text-align: left;
+        box-sizing: border-box;
+        /*padding-left: 10%;/*
+    }
+
+    .table-box tr td {
+        box-sizing: border-box;
+        text-align: left;
+        padding-left: 10%;
+    }
+
+    #btn {
+        background: #409eff;
+        outline: none;
+        border: 1px solid #409eff;
+        padding: 5px;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+    }
+</style>
+
 <body>
-<table>
-    <tr>
-        <td>时间</td>
-        <td>内容</td>
-    </tr>
-    <div th:each="criteriaMessage : ${session.criteriaMessages}">
-        <tr>
-            <td>[[${criteriaMessage.formTime()}]]</td>
-            <td th:if="${criteriaMessage.isRead} == false">
-                未读
-            </td>
-            <td th:if="${criteriaMessage.isRead} == true">
-                已读
-            </td>
-            <td th:utext="${criteriaMessage.content}"></td>
-            <td>
-                <form action="/MessageController/updateMessageState">
-                    <input type="hidden" name="id" th:value="${criteriaMessage.id}">
-                    <input type="submit" value="更新消息状态">
-                </form>
-            </td>
-        </tr>
+    <div class="blogs-box">
+        <header class="header-box">
+            <nav class="nav-box">
+                <a href="/select.html">返回主页</a>
+                <a href="/editController/write">写博客</a>
+                <a href="/ArticleTypeController/articleType.html">分类管理</a>
+                <a href="/viewBlogController/getArticle?pageNum=1&pageSize=5">我的博客</a>
+                <a href="/MessageController/getMessageList">我的消息</a>
+                <a href="/ExitController/exit">退出登录</a>
+            </nav>
+        </header>
+        <table class="table-box">
+            <tr>
+                <th>时间</th>
+                <th>内容</th>
+            </tr>
+            <div th:each="criteriaMessage : ${session.criteriaMessages}">
+                <tr>
+                    <td>[[${criteriaMessage.formTime()}]]</td>
+                    <td th:if="${criteriaMessage.isRead} == false">
+                        未读
+                    </td>
+                    <td th:if="${criteriaMessage.isRead} == true">
+                        已读
+                    </td>
+                    <td th:utext="${criteriaMessage.content}"></td>
+                    <td>
+                        <form action="/MessageController/updateMessageState">
+                            <input type="hidden" name="id" th:value="${criteriaMessage.id}">
+                            <input id="btn" type="submit" value="更新消息状态">
+                        </form>
+                    </td>
+                </tr>
+            </div>
+        </table>
     </div>
-</table>
 </body>
+
 </html>

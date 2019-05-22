@@ -106,7 +106,7 @@
                 <div th:text="${realName}" class="warn"></div></br>
                 <input type="text" name="birth" placeholder="请输入生日 例如:1997-9-18">
                 <div th:text="${birth}" class="warn"></div></br>
-                <input type="hidden" name="professionalType3Id"  th:value="${id}">
+                <input type="hidden" name="professionalType3Id"  th:value="${session.professionalType3Id}">
                 <input type="text" name="phone" placeholder="请输入电话">
                 <div th:text="${phone}" class="warn"></div></br>
                 <input type="text" name="email" placeholder="请输入邮箱 例如:1275119618@qq.com">

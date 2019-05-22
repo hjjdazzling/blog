@@ -27,6 +27,7 @@ public class MyWebAppConfiguration extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index.html").setViewName("index");
+        registry.addViewController("/select.html").setViewName("select");
     }
 
 }

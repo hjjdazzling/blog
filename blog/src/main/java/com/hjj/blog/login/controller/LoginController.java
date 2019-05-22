@@ -4,7 +4,9 @@ import com.hjj.blog.login.service.LoginService;
 import com.hjj.blog.projo.Article;
 import com.hjj.blog.projo.User;
 import com.hjj.blog.recommend.service.RecommandService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -33,6 +35,7 @@ public class LoginController {
     private RecommandService recommandService;
     @Autowired
     private Set<Article> articleSet;
+
 
     /**
      * 单点登陆
@@ -64,6 +67,7 @@ public class LoginController {
         if (id == null || id < 0) {
 
             request.setAttribute("error", "用户名或者密码不正确");
+
             return "/index";
         } else {
             ServletContext servletContext = session.getServletContext();
@@ -89,7 +93,9 @@ public class LoginController {
                 }
             }
 
-            session.setMaxInactiveInterval(60);
+
+            //session
+            session.setMaxInactiveInterval(60*10);
 
             List<Article> recommandArticlesByProfessionalType =
                     recommandService.getRecommandArticleByProfessionalType(user.getId(), 1,5);
@@ -97,12 +103,18 @@ public class LoginController {
             List<Article> recommandArticlesByAttentionAllId =
                     recommandService.getRecommandArticleByAttentionAllId(user.getId(), 1, 5);
 
-            articleSet.addAll(recommandArticlesByProfessionalType);
-            articleSet.addAll(recommandArticlesByAttentionAllId);
 
-            request.setAttribute("recommandArticles", articleSet);
+            if (recommandArticlesByProfessionalType != null) {
+                articleSet.addAll(recommandArticlesByProfessionalType);
+            }
+            if(recommandArticlesByAttentionAllId != null) {
+                articleSet.addAll(recommandArticlesByAttentionAllId);
+            }
+
+            session.setAttribute("recommandArticles", articleSet);
 
             return "select";
         }
     }
+    
 }

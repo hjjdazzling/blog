@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Date;
@@ -34,11 +35,13 @@ public class CriteriaController {
     private ViewBlogService viewBlogService;
 
     @RequestMapping("/criteria")
-    public String criteria(Message message, Criteria criteria, HttpSession session,
+    public String criteria(Message message, Criteria criteria, HttpSession session,HttpServletRequest request,
                            @RequestParam(value = "content2", required = false) String content2,
                            @RequestParam(value = "toUserId", required = false) Integer toUserId,
                            @RequestParam("isReply") boolean isReply,
-                           @RequestParam(value = "criteriaId",required = false) Integer criteriaId) {
+                           @RequestParam(value = "criteriaId",required = false) Integer criteriaId,
+                           @RequestParam(value = "articleContent", required = false) String articleContent,
+                           @RequestParam(value = "title", required = false) String title) {
         message.setTime(new Date());
         criteria.getCriteriaArticle().add(message);
         criteria.setCriteriaTime(new Date());
@@ -60,6 +63,7 @@ public class CriteriaController {
         }
 
 
+
         //文章的作者
         criteriaMessage.setUserId(toUserId);
         criteriaMessage.setFromUserId(user.getId());
@@ -74,6 +78,9 @@ public class CriteriaController {
         //添加评论信息
         List<Criteria> list = viewBlogService.getArticleCriteriaById(criteria.getArticleId());
         session.setAttribute("criterias", list);
+
+        request.setAttribute("title", title);
+        request.setAttribute("content", articleContent);
         return "display";
     }
 }

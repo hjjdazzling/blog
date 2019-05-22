@@ -35,8 +35,13 @@ public class EditController {
     @RequestMapping("/write")
     public String write(HttpServletRequest request, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        List<ArticleType> articleTypes = editService.getAll(user.getId());
-        session.setAttribute("articleTypes", articleTypes);
+
+        //可能前面进行过分类模块的操作,session中已经存在articleTypes
+        if (session.getAttribute("articleTypes") == null) {
+            List<ArticleType> articleTypes = editService.getAll(user.getId());
+            session.setAttribute("articleTypes", articleTypes);
+        }
+
         return "write";
     }
 
@@ -64,7 +69,10 @@ public class EditController {
         editService.save(article);
         //将markDown语法转变成html语法
         String html =peg.markdownToHtml(article.getContent());
+
         request.setAttribute("content", html);
+
+        request.setAttribute("title", article.getTitle());
 
         return "display";
     }

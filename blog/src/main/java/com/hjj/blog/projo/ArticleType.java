@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author haojunjie
  * @create 2019-03-08 19:02
  */
-public class ArticleType  {
+public class ArticleType {
     private Integer id;
     private Integer userId;
     @NotBlank(message = "类别名不能为空")

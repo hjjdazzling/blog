@@ -21,6 +21,6 @@
 
     <insert id="registerUserInformation">
         insert into user_information(user_id, professional_type3_id, real_name, birth, phone, email, attention_number, fans_number, description)
-        values(#{user_id}, #{professionalType3Id}, #{realName}, #{birth}, #{phone}, #{email}, 0, 0, #{description});
+        values(#{userId}, #{professionalType3Id}, #{realName}, #{birth}, #{phone}, #{email}, 0, 0, #{description});
     </insert>
 </mapper>

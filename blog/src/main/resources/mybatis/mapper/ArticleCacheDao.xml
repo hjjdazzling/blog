@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjj.blog.articlecache.dao.ArticleCacheDao">
+    <select id="articles"  resultType="com.hjj.blog.projo.Article">
+        select * from article where priacy = 0
+        order by praise_number DESC, view_count DESC
+        limit 100
+    </select>
+
+</mapper>

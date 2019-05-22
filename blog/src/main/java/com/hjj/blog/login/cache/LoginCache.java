@@ -25,8 +25,9 @@ public class LoginCache {
 
     /**
      * 返回  null 不存在  需要查找数据库
-     * 返回  1     登陆成功
+     * 返回  用户id     登陆成功
      * 返回  0     密码不成功
+     * 返回 -1     表示这是防止缓存穿透插入的数据
      * @param user
      * @return
      */

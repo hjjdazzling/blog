@@ -25,7 +25,7 @@ public class RegisterController {
 
     @RequestMapping("/register.html")
     public String getRegister(@RequestParam("professionType3Id") Integer id, HttpServletRequest request) {
-        request.setAttribute("id", id);
+        request.getSession().setAttribute("professionalType3Id", id);
         return "register";
     }
 
@@ -92,7 +92,7 @@ public class RegisterController {
         registerService.registerUser(user);
         userInformation.setUserId(user.getId());
         registerService.registerUserInformation(userInformation);
-
+        request.setAttribute("message", "注册成功请登录");
 
         return "index";
     }

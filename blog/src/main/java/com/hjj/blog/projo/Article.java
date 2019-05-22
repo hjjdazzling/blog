@@ -3,6 +3,8 @@ package com.hjj.blog.projo;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -25,6 +27,11 @@ public class Article  {
     private String content;
 
     public Article() {
+    }
+
+    public String formTime() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return df.format(updateTime);
     }
 
     @Override

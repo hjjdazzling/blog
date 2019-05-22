@@ -20,7 +20,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CriteriaServiceTest {
+public class CriteriaCacheServiceTest {
     @Autowired
     private CriteriaService criteriaService;
 

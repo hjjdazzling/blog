@@ -1,86 +1,186 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>文章类型</title>
     <style type="text/css">
-    body{
+        body {
+            margin: 0;
+            padding: 0;
+            background: url("/images/5.jpg") no-repeat;
+            background-size: cover;
+        }
+
+        #header_box {
+            width: 100%;
+            height: 40px;
+            background-color: #333333;
+            line-height: 40px;
+
+        }
+
+        .right {
+            margin-bottom: 10px;
+            display: block;
+            margin-top: 10px;
+            /* margin-left: 10px; */
+        }
+
+        .tablelist {
+            width: 100%;
+            border: 1px solid;
+            border-collapse: collapse;
+
+        }
+
+        .tablelist tr:nth-child(odd) {
+            background-color: #ccc;
+        }
+
+        .tablelist tr:nth-child(even) {
+            background-color: #eaf5ff;
+        }
+
+        .tablelist th,
+        td {
+            border: 1px solid #999;
+        }
+
+        .btn {
+            float: right;
+        }
+
+        .tablelist .hidden {
+            border: none;
+            width: 80%;
+            background-color: transparent;
+        }
+
+        .typeError2 {
+            color: red;
+            margin-top: 2vh;
+            margin-left: 1vh;
+
+        }
+
+        .typeError {
+            position: absolute;
+            top: 40px;
+            color: red;
+            font-size: 2vh;
+            left: 10px;
+        }
+        * {
         margin: 0;
         padding: 0;
-        background: url("/images/5.jpg") no-repeat;
+        text-decoration: none;
+    }
+
+    .blogs-box {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: url('./134747.png') -117px;
         background-size: cover;
     }
-    .right{margin-bottom: 40px;display: block;margin-top: 10px;margin-left: 10px;}
-    .tablelist{width:100%;
-        border: 1px solid ;
-        border-collapse: collapse;
+
+    #header_box {
+        width: 100%;
+        height: 40px;
+        background-color: #333333;
+        line-height: 40px;
 
     }
-    .tablelist tr:nth-child(odd){
-        background-color: #ccc;
+
+    .nav-box {
+        width: 80%;
+        height: 40px;
+        margin: 0 auto;
     }
-    .tablelist tr:nth-child(even){
-        background-color: #eaf5ff;
+
+    .nav-box a {
+        color: #B0B0B0;
+        margin-right: 15px;
+        display: inline-block;
+        height: 40px;
+        border-radius: 5px;
+        transition-duration: 1s;
     }
-    .tablelist th,td{
-        border: 1px solid #999;
+
+    .nav-box a:hover {
+        color: #fff;
+        background-color: paleturquoise;
     }
-    .btn{
-        float: right;
+    .form-box {
+        width: 80%;
+        height: 1000px;
+        margin: 0 auto;
     }
-    .tablelist .hidden{
-        border: none;
-       width: 80%;
-        background-color: transparent;
+    .inptTxt{
+        height: 23px;
     }
-    .typeError2{
-        color: red;
-        margin-top: 2vh;
-        margin-left: 1vh;
-        
-    }
-    .typeError{
-        position: absolute;
-        top: 40px;
-        color: red;
-        font-size: 2vh;
-        left: 10px;
+    .inptSbt{
+        /* height: 23px; */
+        border: 0;
+        display: inline-block;
+        color: #fff;
+        /* box-sizing: border-box; */
+        padding: 5px;
+        background-color: #40a9ff;
     }
     </style>
 </head>
+
 <body>
-    <form method="post" action="/ArticleTypeController/addArticleType" class="right">
-        <input type="hidden" name="userId" th:value="${session.user.id}">
-        <input type="text" name="typeName">
-        <input type="submit" value="添加分类"/>
-    </form>
-    <div th:text="${typeNameError1}" class="typeError"></div>
-    <table class="tablelist">
-        <tr>
-            <td>类别</td>
-            <td>更新</td>
-            <td>删除</td>
-        </tr>
-        <div th:each="type:${session.articleTypes}">
+    <div class="blogs-box">
+        <header id="header_box">
+            <nav class="nav-box">
+                <a href="/select.html">返回主页</a>
+                <a href="/editController/write">写博客</a>
+                <a href="/ArticleTypeController/articleType.html">分类管理</a>
+                <a href="/viewBlogController/getArticle?pageNum=1&pageSize=5">我的博客</a>
+                <a href="/MessageController/getMessageList">我的消息</a>
+                <a href="/ExitController/exit">退出登录</a>
+            </nav>
+        </header>
+        <div class="form-box">
+            
+        <form method="post" action="/ArticleTypeController/addArticleType" class="right">
+            <input type="hidden" name="userId" th:value="${session.user.id}">
+            <input class="inptTxt" type="text" name="typeName">
+            <input class="inptSbt" type="submit" value="添加分类" />
+        </form>
+        <div th:text="${typeNameError1}" class="typeError"></div>
+        <table class="tablelist">
             <tr>
-                <td>[[${type.typeName}]]</td>
-                <td>
-                    <form action="/ArticleTypeController/updateArticleType" method="post">
-                        <input type="hidden" name="id" th:value="${type.id}">
-                        <input type="text" name="typeName" placeholder="请输入新的名字" class="hidden">
-                        <input type="submit" value="确认"class="btn">
-                    </form>
-                </td>
-                <td>
-                    <form action="/ArticleTypeController/deleteArticleType" method="post">
-                        <input type="hidden" name="id" th:value="${type.id}">
-                        <input type="submit" value="删除">
-                    </form>
-                </td>
+                <td>类别</td>
+                <td>更新</td>
+                <td>删除</td>
             </tr>
-             
+            <div th:each="type:${session.articleTypes}">
+                <tr>
+                    <td>[[${type.typeName}]]</td>
+                    <td>
+                        <form action="/ArticleTypeController/updateArticleType" method="post">
+                            <input type="hidden" name="id" th:value="${type.id}">
+                            <input type="text" name="typeName" placeholder="请输入新的名字" class="hidden">
+                            <input type="submit" value="确认" class="btn">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/ArticleTypeController/deleteArticleType" method="post">
+                            <input type="hidden" name="id" th:value="${type.id}">
+                            <input type="submit" value="删除">
+                        </form>
+                    </td>
+                </tr>
+
+            </div>
+        </table>
+        <div th:text="${typeNameError2}" class="typeError2"></div>
         </div>
-    </table>
-    <div th:text="${typeNameError2}" class="typeError2"></div>
+    </div>
 </body>
+
 </html>

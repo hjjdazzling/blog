@@ -31,6 +31,8 @@ public class RecommandService {
 
 
     public List<Article> getRecommandArticleByProfessionalType(int userId,int pageNum,int pageSize) {
+        //清除上一个用户的数据
+        viewRecords.clear();
         //获取用户浏览过的文章记录放入set
         List<ViewRecord> list = recommandDao.getViewRecordByUserId(userId);
 
@@ -43,7 +45,6 @@ public class RecommandService {
             }
 
         }
-
         //使用分页插件
         PageHelper.startPage(pageNum, pageSize);
         return recommandDao.getArticleByProfessionalType(viewRecords);
@@ -61,7 +62,6 @@ public class RecommandService {
             }
 
         }
-
         UserInformation2 userInformation2 = recommandDao.getUserInformation2ByUserId(userId);
         //使用分页插件
         PageHelper.startPage(pageNum, pageSize);

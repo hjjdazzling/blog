@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjj.blog.criteriacache.dao.CriteriaCacheDao">
+    <select id="getCriterias" resultType="com.hjj.blog.projo.Criteria">
+        select id, article_id, user_id, criteria_article from criteria
+        where article_id in
+        <foreach collection="articlesId" separator="," open="(" close=")" item="articleId">
+              #{articleId}
+        </foreach>
+    </select>
+</mapper>

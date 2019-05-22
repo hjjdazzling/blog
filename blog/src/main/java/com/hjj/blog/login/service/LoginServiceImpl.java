@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by haojunjie on 2019/2/23
  */
@@ -37,12 +40,18 @@ public class LoginServiceImpl implements LoginService {
 
                 user.setId(result);
                 loginCache.loginCacheUser(user);
+            } //没有这个用户放入此用户名和时间戳
+            else {
+                Instant instant = Instant.now().plusMillis(TimeUnit.HOURS.toMillis(8));
+                long timeStamp = instant.getEpochSecond();
+                user.setId(-1);
+                user.setPassword(String.valueOf(timeStamp));
+                loginCache.loginCacheUser(user);
+                result = null;
             }
 
         } else if (result == 0) {
             result = null;
-        } else if(result == 1) {
-            result = 1;
         }
 
         return result;

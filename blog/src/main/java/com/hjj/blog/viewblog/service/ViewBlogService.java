@@ -3,6 +3,7 @@ package com.hjj.blog.viewblog.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hjj.blog.articlecache.cache.ArticleCache;
 import com.hjj.blog.projo.Article;
 import com.hjj.blog.projo.Criteria;
 import com.hjj.blog.projo.UserInformation2;
@@ -28,6 +29,8 @@ public class ViewBlogService {
     private  ViewBlogDao viewBlogDao;
     @Autowired
     private ViewBlogCache viewBlogCache;
+    @Autowired
+    private ArticleCache articleCache;
 
     public List<Article> getArticle(Integer userId,int pageNum, int pageSize) {
         //使用分页插件
@@ -37,7 +40,15 @@ public class ViewBlogService {
     }
 
     public String getArticleContent(int id) {
-        return viewBlogDao.getArticleContent(id);
+        Article article = viewBlogCache.getById(id);
+        String content = null;
+
+        if(article == null) {
+            content = viewBlogDao.getArticleContent(id);
+        } else {
+            content = article.getContent();
+        }
+        return content;
     }
 
     public Integer getArticleUserId(int id) {

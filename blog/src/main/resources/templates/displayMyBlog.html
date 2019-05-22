@@ -3,29 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <title>我的博客</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    .blogs-box {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: url('./134747.png') -117px;
+        background-size: cover;
+    }
+
+    #header_box {
+        width: 100%;
+        height: 40px;
+        background-color: #333333;
+        line-height: 40px;
+
+    }
+
+    .nav-box {
+        width: 80%;
+        height: 40px;
+        margin: 0 auto;
+    }
+
+    .nav-box a {
+        color: #B0B0B0;
+        margin-right: 15px;
+        display: inline-block;
+        height: 40px;
+        border-radius: 5px;
+        transition-duration: 1s;
+    }
+
+    .nav-box a:hover {
+        color: #fff;
+        background-color: paleturquoise;
+    }
+    .cneterRos {
+        width: 100%;
+        padding-left: 80px;
+        padding-right: 80px;
+        box-sizing: border-box;
+        height: 80px;
+        line-height: 40px;
+        border-bottom: 1px solid #ccc;
+    }
+    .cneterRos a{
+        color: #4f4f4f;
+    }
+    .cneterRos h5 {
+        text-align: right;
+    }
+     .form-box {
+        width: 80%;
+        height: 1000px;
+        margin: 0 auto;
+    }
+
+    .box-left{display:block;margin-left:40%;float:left;margin-top: 20px; }
+    .box-right{display: block;margin-top: 20px}
+        form{float:left;margin-left: 5%;margin-right: 5%;margin-top: 20px}
+        .now{ width: 80%;
+        margin-left: 40%;
+         margin-top: 20px
+    }
+        .box-right .box-left:hover {
+        cursor: pointer;
+     
+    }
+       
+    </style>
 </head>
 <body>
-    <div th:each="article:${session.articles}">
-        <a th:href="@{/viewBlogController/getArticleContent(id=${article.id})}">
+    <div class="blogs-box">
+        <header id="header_box">
+            <nav class="nav-box">
+    <a href="/select.html">返回主页</a>
+    <a href="/editController/write">写博客</a>
+    <a href="/ArticleTypeController/articleType.html">分类管理</a>
+    <a href="/viewBlogController/getArticle?pageNum=1&pageSize=5">我的博客</a>
+    <a href="/MessageController/getMessageList">我的消息</a>
+    <a href="/ExitController/exit">退出登录</a>
+</nav>
+        </header>
+         <div class="form-box">
+    <div  class="cneterRos"th:each="article:${session.articles}">
+        <a th:href="@{/viewBlogController/getArticleContent(id=${article.id}, title=${article.title})}">
             [[${article.title}]]
         </a> &nbsp;&nbsp;
         <a th:href="@{/viewBlogController/getContentToEdit(id=${article.id}, title=${article.title})}">编辑</a>&nbsp;
         <a th:href="@{/DeleteBlogController/deleteBlogById(id=${article.id})}">删除</a>
         <h5>
             点赞数:[[${article.praiseNumber}]] &nbsp;
+            浏览数:[[${article.viewCount}]]&nbsp;
             差赞数:[[${article.negativeNumber}]] &nbsp;
-            更新时间: [[${article.updateTime}]]&nbsp;
+            更新时间: [[${article.formTime()}]]&nbsp;
         </h5>
-    </div>
-    <a th:href="@{/viewBlogController/getArticle(pageNum=${session.articles.pageNum}-1, pageSize=1)}">上一页</a>
+    </div><br/>
 
-    <form action="/viewBlogController/getArticle">
-        <input type="hidden" name="pageSize" value="1">
-        跳转:<input type="text" name="pageNum">页
-        <input type="submit" value="确定">
-    </form>
+        <a class="box-left" th:href="@{/viewBlogController/getArticle(pageNum=${session.articles.pageNum}-1, pageSize=5)}">上一页</a>
 
-    <a th:href="@{/viewBlogController/getArticle(pageNum=${session.articles.pageNum}+1, pageSize=1)}">下一页</a>
+        <form action="/viewBlogController/getArticle">
+            <input type="hidden" name="pageSize" value="5">
+            跳转:<input type="text" name="pageNum">页
+            <input type="submit" value="确定">
+        </form>
+
+        <a class="box-right" th:href="@{/viewBlogController/getArticle(pageNum=${session.articles.pageNum}+1, pageSize=5)}">下一页</a>
+    <br/>
+    <div class="now">
     <h5>当前页数:[[${session.articles.pageNum}]] &nbsp;总记录数:[[${session.articles.total}]] &nbsp; 总页数:[[${session.articles.pages}]]</h5>
+    </div>
+</div>
+</div>   
+ </div>
 </body>
 </html>

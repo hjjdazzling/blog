@@ -2,6 +2,7 @@ package com.hjj.blog.recommend.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +13,7 @@ import java.util.Set;
  */
 @Configuration
 public class RecommandConfiguration {
-    @Bean("viewRecords")
+    @Bean(value = "viewRecords")
     public Set<Integer> viewRecords() {
         return new HashSet<>();
     }
